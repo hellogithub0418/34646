@@ -11,6 +11,7 @@ public class WuyeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WuyeApplication.class, args);
+        System.out.println("服务器访问路径： http://localhost:8888");
     }
 
 }
