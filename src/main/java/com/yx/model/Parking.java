@@ -20,16 +20,16 @@ public class Parking implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 4252853808327570363L;
-	@TableId(value = "park_id", type = IdType.AUTO)
-	private Integer park_id;
+	@TableId(value = "parkId", type = IdType.AUTO)
+	private Integer parkId;
 	private String numbers;
 	private Integer status;
-	private Integer owner_id;
+	private Integer ownerId;
 	private String remarks;
 	
-	public Parking(Integer park_id) {
+	public Parking(Integer parkId) {
 		super();
-		this.park_id = park_id;
+		this.parkId = parkId;
 	}
 
 

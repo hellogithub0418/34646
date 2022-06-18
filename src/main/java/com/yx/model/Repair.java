@@ -20,17 +20,17 @@ public class Repair implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -6929869583824216663L;
-	@TableId(value = "repair_id", type = IdType.AUTO)
-	private Integer repair_id;
-	private Integer building_id;
+	@TableId(value = "repairId", type = IdType.AUTO)
+	private Integer repairId;
+	private Integer buildingId;
 	private String problem;
-	private Date report_time;
-	private Date handle_time;
+	private Date reportTime;
+	private Date handleTime;
 	private Integer status;
 	private String remarks;
-	public Repair(Integer repair_id) {
+	public Repair(Integer repairId) {
 		super();
-		this.repair_id = repair_id;
+		this.repairId = repairId;
 	}
 
 

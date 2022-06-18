@@ -28,7 +28,7 @@ public class PropertyInfo implements Serializable{
 	@JsonFormat(pattern = "yyyy-MM-dd ",timezone = "GMT+8")
 	private Date time;
 	private Integer status;
-	private Integer house_id;
+	private Integer houseId;
 	private String remarks;
 	public PropertyInfo(Integer id) {
 		super();

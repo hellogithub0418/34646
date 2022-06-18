@@ -20,17 +20,17 @@ public class House implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2513810280804509952L;
-	@TableId(value = "house_id", type = IdType.AUTO)
-	private Integer house_id;
+	@TableId(value = "houseId", type = IdType.AUTO)
+	private Integer houseId;
 	private String numbers;
 	private Integer status;
-	private Date into_date;
-	private Integer building_id;
+	private Date intoDate;
+	private Integer buildingId;
 	private String remarks;
 	private double area;
-	public House(Integer house_id) {
+	public House(Integer houseId) {
 		super();
-		this.house_id = house_id;
+		this.houseId = houseId;
 	}
 
 

@@ -20,18 +20,18 @@ public class Owner implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -3748155191525529253L;
-	@TableId(value = "owner_id", type = IdType.AUTO)
-	private Integer owner_id;
+	@TableId(value = "ownerId", type = IdType.AUTO)
+	private Integer ownerId;
 	private String username;
 	private String tel;
 	private String sex;
 	private String identity;
-	private Integer house_id;
+	private Integer houseId;
 	private String remarks;
 	private String password;
-	public Owner(Integer owner_id) {
+	public Owner(Integer ownerId) {
 		super();
-		this.owner_id = owner_id;
+		this.ownerId = ownerId;
 	}
 
 

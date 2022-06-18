@@ -26,14 +26,14 @@ public class Carcharge implements Serializable{
 	@TableId(value = "id", type = IdType.AUTO)
 	private Integer id;
 	@JsonFormat(pattern = "yyyy-MM-dd ",timezone = "GMT+8")
-	private Date pay_date;
+	private Date payDate;
 	@JsonFormat(pattern = "yyyy-MM-dd ",timezone = "GMT+8")
-	private Date end_date;
+	private Date endDate;
 	private String money;
 	private Integer status;
 	private String remarks;
 	private String type;
-	private Integer park_id;
+	private Integer parkId;
 	
 	public Carcharge(Integer id) {
 		super();

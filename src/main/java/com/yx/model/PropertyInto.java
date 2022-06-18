@@ -25,7 +25,7 @@ public class PropertyInto implements Serializable{
 	private Date time;
 	private Integer type;
 	private double price;
-	private Integer building_id;
+	private Integer buildingId;
 	private String remarks;
 	public PropertyInto(Integer id) {
 		super();
