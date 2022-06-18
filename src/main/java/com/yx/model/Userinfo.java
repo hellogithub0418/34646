@@ -21,9 +21,14 @@ import java.io.Serializable;
 @ApiModel(value="Userinfo对象", description="")
 public class Userinfo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+   
 
-    @TableId(value = "id", type = IdType.AUTO)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8937613975242900951L;
+
+	@TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     private String username;
