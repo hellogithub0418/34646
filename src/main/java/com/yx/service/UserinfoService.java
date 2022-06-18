@@ -24,7 +24,8 @@ public interface UserinfoService extends IService<Userinfo> {
      * @return IPage<Userinfo>
      */
     IPage<Userinfo> findListByPage(Integer page, Integer pageCount);
-
+    
+    //分页查询
     PageInfo<Userinfo> findUserinfoAll(int page, int pageSize, Userinfo userinfo);
 
     /**
