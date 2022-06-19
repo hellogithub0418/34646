@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yx.dao.ParkingMapper">
+	<resultMap id="BaseResultMap" type="com.yx.model.Parking">
+		<id column="park_id" property="parkId" />
+		<result column="park_id" property="numbers" />
+		<result column="status" property="status" />
+		<result column="owner_id" property="ownerId" />
+		<result column="remarks" property="remarks" />
+	</resultMap>
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		park_id, numbers, status, owner_id, remarks
+	</sql>
+
+	<select id="findById" parameterType="int"
+		resultType="com.yx.model.Parking">
+		select * from parking where park_id = #{park_id}
+	</select>
+
+	<insert id="add" parameterType="com.yx.model.Parking">
+		<!-- 前面是数据库的列名 -->
+		insert into
+		parking(park_id,numbers,status,owner_id,remarks)
+		<!-- 后的是java类的属性名 -->
+		values(#{park_id},#{numbers},#{status},#{owner_id},#{remarks})
+	</insert>
+
+	<update id="edit" parameterType="com.yx.model.Parking">
+		update parking
+		<set>
+			<!-- test里面的变量是java类的属性 -->
+			<if test="parkId != null"> park_id =#{park_id},</if>
+			<if test="numbers != null"> numbers =#{numbers},</if>
+			<if test="status != null"> status =#{status},</if>
+			<if test="ownerId != null"> owner_id =#{owner_id},</if>
+			<if test="remarks != null"> remarks =#{remarks},</if>
+		</set>
+		<!-- 严重警告：update必须带where条件 -->
+		where park_id = #{park_id}
+	</update>
+
+	<delete id="deleteByIds" parameterType="list">
+		delete from parking
+		<where>
+			<foreach item="parking" index="index" collection="list"
+				open="parkId in (" separator="," close=")">
+				#{parking.park_id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>
