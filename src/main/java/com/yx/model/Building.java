@@ -2,9 +2,6 @@ package com.yx.model;
 
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,9 +19,6 @@ public class Building implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2439935264510908737L;
-	@TableId(value = "buildingId", type = IdType.AUTO)
-	
-	
 	private Integer buildingId;
 	private String buildingName;
 	private String uints;
