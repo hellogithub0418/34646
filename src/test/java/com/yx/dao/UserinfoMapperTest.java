@@ -39,6 +39,8 @@ public class UserinfoMapperTest {
 //		for(Userinfo userinfo : list) {
 //			log.info(userinfo.toString());
 //		}
+        int count = userinfoMapper.deleteById(9);
+        System.out.println(count);
 	}
 
 }
