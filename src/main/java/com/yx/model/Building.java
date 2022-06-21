@@ -21,8 +21,8 @@ public class Building implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2439935264510908737L;
-	@TableId(value = "buildingId", type = IdType.AUTO)
+//	private static final long serialVersionUID = -2439935264510908737L;
+//	@TableId(value = "buildingId", type = IdType.AUTO)
 	
 	
 	private Integer buildingId;
@@ -30,13 +30,13 @@ public class Building implements Serializable{
 	private String uints;
 	private String remarks;
 
-	public Building(Integer buildingId) {
-		super();
-		this.buildingId = buildingId;
-	}
-
-	public Building() {
-		super();
-	}
+//	public Building(Integer buildingId) {
+//		super();
+//		this.buildingId = buildingId;
+//	}
+//
+//	public Building() {
+//		super();
+//	}
 
 }
