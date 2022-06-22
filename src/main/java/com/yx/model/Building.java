@@ -22,8 +22,9 @@ public class Building implements Serializable{
 	 * 
 	 */
 //	private static final long serialVersionUID = -2439935264510908737L;
-//	@TableId(value = "buildingId", type = IdType.AUTO)
+
 	
+	@TableId(value = "building_id", type = IdType.AUTO)
 	
 	private Integer buildingId;
 	private String buildingName;

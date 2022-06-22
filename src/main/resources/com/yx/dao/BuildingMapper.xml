@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yx.dao.BuildingMapper">
-	<resultMap id="buliding" type="com.yx.model.Building">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.yx.model.Building">
                     <id column="building_id" property="buildingId"/>
                     <result column="building_name" property="buildingName"/>
                     <result column="uints" property="uints"/>
                     <result column="remarks" property="remarks"/>
-    </resultMap>
-    <select id="findBuildAll" resultType="com.yx.model.Building">
-    	 select * from building;
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            building_id, building_name, uints, remarks
+        </sql>
+
+    <!--查询楼宇-->
+    <select id="queryBuildAll" parameterType="string" resultType="com.yx.model.Building">
+        select * from building
+        <where>
+            <if test="numbers!=null and numbers!=''">
+                and numbers like '%${numbers}%'
+            </if>
+        </where>
     </select>
-    <update id="updateData" parameterType="com.yx.model.Building">
-    	update building set building_name=#{buildingName},uints=#{uints},remarks=#{remarks} where building_id=#{buildingId};
-    </update>
-    <insert id="add" parameterType="com.yx.model.Building">
-    	insert into building(building_name,uints,remarks) value(#{buildingName},#{uints},#{remarks});
-    </insert>
-    <delete id="delete" parameterType="com.yx.model.Building">
-    	delete from building where building_id=#{buildingId};
-    </delete>
+
+    <select id="queryBuildById" resultType="com.yx.model.Building" parameterType="Integer">
+        select * from building where building_id = #{buildId}
+    </select>
 </mapper>
