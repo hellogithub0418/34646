@@ -188,7 +188,7 @@
             var data = obj.data;
             if (obj.event === 'edit') {
                 //修改密码
-                var content = miniPage.getHrefContent('page/base/userinfo/editUserinfo.html');
+                var content = miniPage.getHrefContent('page/base/owner/editOwner.html');
                 var openWH = miniPage.getOpenWidthHeight();
                 var index = layer.open({
                     title: '修改密码',
@@ -199,7 +199,7 @@
                     area: ['60%','60%'],
                     content: content,
                 });
-                $("#userId").val(data.id);
+                $("#ownerId").val(data.ownerId);
                 $(window).on("resize", function () {
                     layer.full(index);
                 });

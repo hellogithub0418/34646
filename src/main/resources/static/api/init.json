@@ -30,13 +30,13 @@
             },
             {
               "title": "物业收费管理",
-              "href": "page/business/property/PropertyIndex.html",
+              "href": "page/business/property/property.html",
               "icon": "fa fa-angle-double-down",
               "target": "_self"
             },
             {
               "title": "投诉信息管理",
-              "href": "page/business/complaint/ComplaintIndex.html",
+              "href": "page/business/property/properbase.html",
               "icon": "fa fa-dot-circle-o",
               "target": "_self"
             },

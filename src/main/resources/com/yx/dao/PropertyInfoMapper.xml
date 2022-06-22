@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yx.dao.PropertyInfoMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.yx.model.PropertyInfo">
+                    <id column="id" property="id"/>
+                    <result column="type" property="type"/>
+                    <result column="price" property="price"/>
+                    <result column="time" property="time"/>
+                    <result column="status" property="status"/>
+                    <result column="house_id" property="houseId"/>
+                    <result column="remarks" property="remarks"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, type, price, time, status, house_id, remarks
+        </sql>
+
+
+    <delete id="deleteByHouIdAndTime" >
+       <!--delete from property_info where house_id=#{houId} and end_date  like '%${endDate}%'*-->
+        delete from property_info where house_id=#{houId} and end_date=#{endDate}
+    </delete>
+
+    <resultMap id="queryListAllMap" type="com.yx.model.PropertyInfo" extends="BaseResultMap">
+        <association property="owner" javaType="com.yx.model.Owner">
+            <id column="owner_id" property="ownerId"></id>
+            <result column="username" property="username"></result>
+        </association>
+        <association property="house" javaType="com.yx.model.House">
+            <id column="house_id" property="houseId"></id>
+            <result column="numbers" property="numbers"></result>
+        </association>
+        <association property="building" javaType="com.yx.model.Building">
+            <id column="building_id" property="buildingId"></id>
+            <result column="building_name" property="buildingName"></result>
+            <result column="uints" property="uints"></result>
+        </association>
+        <association property="ptype" javaType="com.yx.model.PropertyType">
+            <id column="id" property="id"></id>
+            <result column="name" property="name"></result>
+        </association>
+    </resultMap>
+
+
+    <select id="queryListAll" parameterType="com.yx.model.PropertyInfo" resultMap="queryListAllMap">
+        <!--  SELECT
+            info.*, own.username,
+            hou.numbers,
+            type.`name`
+        FROM
+            property_info info
+        LEFT JOIN house hou ON hou.house_id = info.house_id
+        LEFT JOIN `owner` own ON own.house_id = hou.house_id
+        LEFT JOIN property_type type ON type.id = info.type-->
+        SELECT
+            info.*, own.username,
+            hou.numbers,bu.building_name,bu.uints,
+            ptype.name
+        FROM
+            property_info info
+        LEFT JOIN house hou ON hou.house_id = info.house_id
+        LEFT JOIN `owner` own ON own.house_id = hou.house_id
+        LEFT JOIN property_type ptype ON ptype.id = info.type
+				LEFT JOIN building bu ON bu.building_id = hou.building_id
+        <where>
+             <if test="house!=null">
+                 <if test="house.numbers!=null">
+                     and hou.numbers like '%${house.numbers}%'
+                 </if>
+             </if>
+
+            <if test="status!=null and status !=''">
+                    and info.status =#{status}
+            </if>
+
+            <if test="houseId!=null">
+                and info.house_id =#{houseId}
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

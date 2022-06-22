@@ -19,6 +19,7 @@ public class House implements Serializable{
 	/**
 	 * 
 	 */
+	@TableId(value = "house_id")
 	private Integer houseId;
 	private String numbers;
 	private Integer status;
