@@ -28,6 +28,12 @@
           "target": "_self"
         },
         {
+          "title": "疫情打卡",
+          "href": "page/other/clockInNew.html",
+          "icon": "fa fa-dot-circle-o",
+          "target": "_self"
+        },
+        {
           "title": "我的投诉列表",
           "href": "page/base/complaint/complaint2.html",
           "icon": "fa fa-dot-circle-o",

@@ -33,7 +33,7 @@
     <select id="queryComplaintAll" parameterType="com.yx.model.Complaint" resultMap="queryComplaintAllMap">
          SELECT
             com.*, own.username,
-            type.NAME
+
         FROM
             complaint com
         LEFT JOIN complaint_type type ON type.id = com.com_id

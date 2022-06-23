@@ -20,24 +20,20 @@ public class PropertyInfo implements Serializable{
 	 * 
 	 */
 	
-	private static final long serialVersionUID = -3618922690170478332L;
-	@TableId(value = "id", type = IdType.AUTO)
+	//表之间关联
+	private Building building;
+	private  House house;
+    private  Owner owner;
+    private PropertyType ptype;
+	
+	@TableId(value = "id")
 	private Integer id;
 	private Integer type;
-	private double price;
-	@JsonFormat(pattern = "yyyy-MM-dd ",timezone = "GMT+8")
+	private Double price;
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
 	private Date time;
 	private Integer status;
 	private Integer houseId;
 	private String remarks;
-	public PropertyInfo(Integer id) {
-		super();
-		this.id = id;
-	}
 
-
-
-	public PropertyInfo() {
-		super();
-	}
 }

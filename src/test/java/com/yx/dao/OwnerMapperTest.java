@@ -11,19 +11,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yx.model.Owner;
+import com.yx.model.PropertyInfo;
 import com.yx.model.Userinfo;
 
 @SpringBootTest
 public class OwnerMapperTest {
-	private Logger log = LoggerFactory.getLogger(UserinfoMapperTest.class);
+	private Logger log = LoggerFactory.getLogger(OwnerMapperTest.class);
 	
 	@Autowired
 	private OwnerMapper ownerMapper;
 	
 	@Test
 	public void testList() {
-        int count = ownerMapper.deleteById(3);
-        System.out.println(count);
+		Owner owner = new Owner();
+		List<Owner> list = ownerMapper.queryOwnerAll(owner);
+		for (Owner owner2: list) {
+			log.info(owner2.toString());
+		}
+		//List<Owner> queryOwnerAll(Owner owner);
+
 	}
 
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * @author cuijianhui
  * @since 2020-12-08
  */
-public interface IHouseService extends IService<House> {
+public interface HouseService extends IService<House> {
 
     /**
      * 分页查询房屋信息
@@ -66,4 +66,5 @@ public interface IHouseService extends IService<House> {
     House findById(Long id);
 
     House queryHouseById(Integer houId);
+
 }

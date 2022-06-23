@@ -20,21 +20,8 @@ public class PropertyType implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5786019965443618220L;
-	@TableId(value = "id", type = IdType.AUTO)
+	@TableId(value = "id")
 	private Integer id;
 	private String name;
-	private double price;
-	private String unit;
 	private String remarks;
-	public PropertyType(Integer id) {
-		super();
-		this.id = id;
-	}
-
-
-
-	public PropertyType() {
-		super();
-	}
 }

@@ -11,7 +11,6 @@ import com.yx.model.Parking;
 
 
 @Component("parkingDao")
-@Mapper
 public interface ParkingMapper extends BaseMapper<Parking>{
 	//分页查询车位信息
     List<Parking> queryParkAll(@Param("numbers") String numbers);

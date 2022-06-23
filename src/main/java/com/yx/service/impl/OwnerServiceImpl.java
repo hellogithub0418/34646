@@ -75,4 +75,5 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     public Owner queryOwnerByName(String username) {
         return ownerMapper.queryOwnerByName(username);
     }
+
 }

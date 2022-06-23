@@ -23,7 +23,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author cuijianhui
+ * @since 2020-12-08
+ */
 @Api(tags = {""})
 @RestController
 @RequestMapping("/complaint")
@@ -94,13 +101,11 @@ public class ComplaintController {
 
     @ApiOperation(value = "更新")
     @RequestMapping("/update")
-    public R update(Integer id,HttpServletRequest request){
+    public R update(Integer id){
          Complaint complaint=new Complaint();
-         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
-         String username=userinfo.getUsername();
          complaint.setId(id);
          complaint.setStatus(1);
-         complaint.setHandler(username);
+//         complaint.setClr()
         int num= complaintService.updateData(complaint);
         if(num>0){
             return R.ok();

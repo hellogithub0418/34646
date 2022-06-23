@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
+/**
+ * 
+ * @author 34646
+ *
+ */
 @Component("complaintDao")
 public interface ComplaintMapper extends BaseMapper<Complaint> {
 

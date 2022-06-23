@@ -7,6 +7,14 @@ import com.yx.model.ComplaintType;
 import java.util.List;
 
 
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author cuijianhui
+ * @since 2020-12-08
+ */
 public interface ComplaintTypeService extends IService<ComplaintType> {
 
     /**

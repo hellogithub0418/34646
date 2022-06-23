@@ -21,6 +21,11 @@ public interface OwnerMapper extends BaseMapper<Owner> {
     void deleteOwnerByOwnerIds(@Param("id") Integer id);
 
     Owner queryOwnerById(@Param("id") long parseLong);
+
+    
+    /**
+     * 通过username查询owner
+     */
     Owner queryOwnerByName(@Param("username") String username);
 }
 

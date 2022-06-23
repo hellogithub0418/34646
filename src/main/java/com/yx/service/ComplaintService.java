@@ -5,7 +5,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.yx.model.Complaint;
 
-
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author cuijianhui
+ * @since 2020-12-08
+ */
 public interface ComplaintService extends IService<Complaint> {
 
 
