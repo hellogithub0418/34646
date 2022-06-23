@@ -26,19 +26,27 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-
 @ApiModel(value = "House对象",description ="" )
 public class House implements Serializable{
-	/**
-	 * 
-	 */
-	@TableId(value = "house_id")
-	private Integer houseId;
-	private String numbers;
-	private Integer status;
-	private Date intoDate;
-	private Integer buildingId;
-	private String remarks;
-	private Double area;
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "house_id", type = IdType.AUTO)
+    private Integer houseId;
+
+    private String numbers;
+
+    private Integer status;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
+    private Date intoDate;
+
+    @TableField(value = "building_id")
+    private Integer buildingId;
+
+    private String remarks;
+
+    private Double area;
 
 }

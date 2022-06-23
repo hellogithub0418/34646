@@ -51,5 +51,10 @@ public class HouseServiceTest {
 		
 	}
 	
+	@Test
+	public void testSelete() {
+		
+	}
+	
 	
 }
