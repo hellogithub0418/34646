@@ -2,6 +2,7 @@ package com.yx.model;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import io.swagger.annotations.ApiModel;
@@ -15,22 +16,28 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "Building对象",description ="" )
 public class Building implements Serializable{
 	
+	
+	
 	/**
 	 * 
 	 */
-	@TableId(value = "building_id")
+//	private static final long serialVersionUID = -2439935264510908737L;
+
+	
+	@TableId(value = "building_id", type = IdType.AUTO)
+	
 	private Integer buildingId;
 	private String buildingName;
 	private String uints;
 	private String remarks;
 
-	public Building(Integer buildingId) {
-		super();
-		this.buildingId = buildingId;
-	}
-
-	public Building() {
-		super();
-	}
+//	public Building(Integer buildingId) {
+//		super();
+//		this.buildingId = buildingId;
+//	}
+//
+//	public Building() {
+//		super();
+//	}
 
 }

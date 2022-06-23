@@ -4,7 +4,7 @@
         <div class="demoTable">
             楼号：
             <div class="layui-inline">
-                <input class="layui-input" name="numbers"  id="numbers" autocomplete="off">
+                <input class="layui-input" name="buildingName"  id="numbers" autocomplete="off">
             </div>
             <button class="layui-btn" data-type="reload">搜索</button>
         </div>
@@ -28,7 +28,7 @@
 
 <script>
     layui.use(['form', 'table','miniPage','element'], function () {
-    	var $ = layui.jquery,
+        var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
             miniPage = layui.miniPage;
@@ -51,16 +51,16 @@
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
-            limit: 10,
+            limit: 15,
             page: true,
             skin: 'line',
-            buildingId: 'testReload'
+            id: 'testReload'
         });
 
 
         var $ = layui.$, active = {
             reload: function(){
-                var building_name = $('#buildingName');
+                var numbers = $('#numbers');
 
                 //执行重载
                 table.reload('testReload', {
@@ -68,7 +68,7 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                    	building_name:buildingName.val()
+                        numbers:numbers.val()
                     }
                 }, 'data');
             }
@@ -98,67 +98,126 @@
 
             return false;
         });
-
+        
+        function setFormValues(data){
+            form.val("updateSubmit",{
+            	id:data.buildingId,
+                "numbers":data.numbers,
+                "uints":data.uints,
+                "remarks":data.remarks
+            });
+        };
+        
         /**
          * toolbar事件监听
          */
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {   // 监听添加操作
-
                 var content = miniPage.getHrefContent('page/base/build/addBuild.html');
-                var index=openPage(content,"添加楼宇",'60%','60%');
+                var openWH = miniPage.getOpenWidthHeight();
+
+                var index = layer.open({
+                    title: '添加楼宇',
+                    type: 1,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['60%', '60%'],
+                    //offset: [openWH[2] + 'px', openWH[3] + 'px'],
+                    content: content,
+                });
                 $(window).on("resize", function () {
                     layer.full(index);
                 });
-            } else if (obj.event === 'delete') {  // 监听删除操作
-                /*
-                  1、判断是否有选择记录 如果没有提示
-                  2、获取要删除的id集合
-                  3、发送请求 实现删除功能
-                  4、提示成功 并刷新主页
+            } else  if (obj.event === 'delete') {  // 监听删除操作
+            	console.log("==="+data)
+                /**
+                 *  首先判断是否选择信息，如果没有提示
+                 *  如果有
+                 *     1、获取选中的id集合
+                 *     2、通过ajax请求发送id集合，进行业务处理
+                 *  提示成功，刷新主页
                  */
-                var checkStatus=table.checkStatus(obj.config.buildingId);
-                var data =checkStatus.data;
+                 
+                //获取选中的id
+                var checkStatus = table.checkStatus(obj.config.id)
+                    , data = checkStatus.data;
+                
                 if(data.length==0){
-                    layer.msg("请选择要删除的记录信息");
+                    layer.msg("请选要删除的用户");
                 }else{
-                    //获取要删除id的集合
-                    var ids =getCheckId(data);
-                    layer.confirm('你确定要删除记录吗？',function (index) {
-                         //执行删除功能
-                        deleteByIds($,"building/deleteByIds",ids,index);
+                    //获取删除id的集合
+                    console.log("==="+data)
+                    var ids=getCheckId(data);
+                    layer.confirm("确定是否删除？",function(index){
+                    	//执行删除操作
+                    	console.log("==="+data)
+                        deleteById(ids,index);
                     })
-
                 }
-
+                 // layer.alert(JSON.stringify(data));
             }
         });
+        
+        /**
+         * 获取批量删除选中的id集合
+         */
+        function getCheckId(data){
+        	console.log("==="+data)
+            var arr=new Array();
+            //遍历循环选中的id
+            for(var i=0;i<data.length;i++){
+                arr.push(data[i].buildingId);
+            }
+            return arr.join(",");
+        };
+        
+        /**
+         * 删除功能的实现
+         */
+        function deleteById(ids,index){
+        	console.log("===1111=="+ids)
+        	
+            $.ajax({
+                url:"building/deleteByIds",
+                type:"POST",
+                data:{"ids":ids},
+                success:function(result){
+                    if(result.code==200){
+                        layer.msg("删除成功",{
+                            icon:6,
+                            time:500
+                        },function(){
+                            parent.window.location.reload();//重新页面
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                        });
 
-
-
+                    }else{
+                        layer.msg("删除失败");
+                    }
+                }
+            })
+            return false;
+        };
       //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
-            console.log(obj)
+            console.log(obj.config.id)
         });
-
-        /**
-         * 设计渲染form中的信息值
-         */
-        /**
-         * 设计渲染form中的信息值
-         */
+      
         function setFormValues(data){
             form.val("updateSubmit",{
-                "buildingId":data.buildingId,
+            	buildingId:data.buildingId,
                 "buildingName":data.buildingName,
                 "uints":data.uints,
                 "remarks":data.remarks
             });
         };
-
+        //监听操作功能
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
+                //修改密码
                 var content = miniPage.getHrefContent('page/base/build/editBuild.html');
                 var index=openPage(content,"编辑楼宇",'60%','60%');
 
@@ -168,14 +227,19 @@
                     layer.full(index);
                 });
                 return false;
+
             } else if (obj.event === 'delete') {
-                layer.confirm('确认是否删除', function (index) {
-                	console.log(data)
-                	console.log(index)
-                    deleteOneById($,"building/deleteByIds",data,index)
+            	console.log("hhhh");
+                layer.confirm('确定是否删除吗', function (index) {
+                    //调用删除功能即可
+                    console.log("hhhh")
+                    console.log("==============》》》"+data.buildingId)
+                    deleteById(data.buildingId,index);
+                    layer.close(index);
                 });
             }
-        });
+        }); 
+
 
     });
 </script>

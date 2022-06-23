@@ -65,9 +65,10 @@
         order by own.id desc
       </select>-->
 
-    <!--  <select id="queryOwnerByName" parameterType="string" resultType="com.yx.model.Owner">
+    <!-- 通过用户名查询owner -->
+    <select id="queryOwnerByName" parameterType="string" resultType="com.yx.model.Owner">
         select * from owner where username=#{username}
-    </select>-->
+    </select>
 
     <select id="queryOwnerById" parameterType="long" resultType="com.yx.model.Owner">
         select * from owner where owner_id=#{id}

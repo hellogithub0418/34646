@@ -32,10 +32,21 @@ public class ProperMapperTest {
 //		for (PropertyInfo propertyInfo2: list) {
 //			log.info(propertyInfo2.toString());
 //		}
+//		PropertyInto propertyInto = new PropertyInto();
+//		List<PropertyInto> list = propertyIntoMapper.queryListAll(propertyInto);
+//		for (PropertyInto propertyInto2: list) {
+//			log.info(propertyInto2.toString());
+//		}
 		PropertyInto propertyInto = new PropertyInto();
-		List<PropertyInto> list = propertyIntoMapper.queryListAll(propertyInto);
-		for (PropertyInto propertyInto2: list) {
-			log.info(propertyInto2.toString());
-		}
+		propertyInto.setBuildingId(1);
+		propertyInto.setPrice((double) 500);
+		propertyInto.setRemarks(null);
+		propertyInto.setTime(null);
+		propertyInto.setType(1);
+		
+//		int ret = bas(propertyInto);
+//		System.out.println(ret);
+		
+		
 	}
 }

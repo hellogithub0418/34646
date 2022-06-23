@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -19,22 +20,14 @@ public class PropertyInto implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5861444599335324900L;
 	@TableId(value = "id", type = IdType.AUTO)
 	private Integer id;
+	
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
 	private Date time;
 	private Integer type;
-	private double price;
+	private Double price;
 	private Integer buildingId;
 	private String remarks;
-	public PropertyInto(Integer id) {
-		super();
-		this.id = id;
-	}
 
-
-
-	public PropertyInto() {
-		super();
-	}
 }

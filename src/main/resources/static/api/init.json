@@ -36,7 +36,19 @@
             },
             {
               "title": "投诉信息管理",
+              "href": "page/business/complaint/ComplaintIndex.html",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "物业费详情",
               "href": "page/business/property/properbase.html",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "疫情打卡管理",
+              "href": "page/business/Clock/ClockInIndex1.html",
               "icon": "fa fa-dot-circle-o",
               "target": "_self"
             },

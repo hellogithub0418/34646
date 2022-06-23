@@ -50,9 +50,12 @@
 
         //监听提交
         form.on('submit(updateSubmit)', function (data) {
-        	console.log(data);
             //获取表单中的数据信息
             var datas=data.field;
+            console.log("====--->"+datas.buildingId);
+            console.log("====--->"+datas.buildingName);
+            console.log("====--->"+datas.uints)
+            console.log("====--->"+datas.remarks);
             //向后台发送请求 添加
             addOrUpdateSubmit($,"building/update",datas);
 
