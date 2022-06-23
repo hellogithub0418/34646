@@ -23,7 +23,7 @@ public class ParkingServiceTest {
 	
 	
 	
-	//@Test
+	@Test
 	public void testList() {
 		QueryWrapper<Parking> queryWrapper = new QueryWrapper<Parking>();
 		
@@ -32,7 +32,6 @@ public class ParkingServiceTest {
 		Page<Parking> page = new Page<>(1,10);
 		
 		
-		//List<Parking> userList = parkingService.list(queryWrapper);
 		PageInfo<Parking> pageInfo= parkingService.findParkAll(1,10,"555");
 
 		pageInfo.getList().forEach(System.out::println);

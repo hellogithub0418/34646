@@ -21,24 +21,8 @@
 
    
 
-    <select id="queryRepairAll" parameterType="com.yx.model.Repair" resultMap="queryRepairAllMap">
-        SELECT
-        rep.*, bu.building_name,bu.uints,bu.remarks,
-        type. NAME
-        FROM
-        REPAIR rep
-        
-        LEFT JOIN building bu ON bu.building_id = rep.building_id
-
-        <where>
-            <if test="comId!=null">
-                and report_time=#{reportTime}
-            </if>
-            <if test="status!=null ">
-                and rep.status=#{status}
-            </if>
-            
-        </where>
+    <select id="queryRepairAll" parameterType="com.yx.model.Repair" resultMap="BaseResultMap">
+   
 
     </select>
 

@@ -19,7 +19,7 @@
 
     
 
-    <select id="queryRepairCostAll" parameterType="com.yx.model.RepairCost" resultMap="queryRepairCostAllMap">
+    <select id="queryRepairCostAll" parameterType="com.yx.model.RepairCost" resultMap="BaseResultMap">
         SELECT
         rep.*, rec.*
         
