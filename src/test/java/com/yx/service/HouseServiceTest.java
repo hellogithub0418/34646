@@ -16,12 +16,12 @@ import com.yx.model.House;
 import com.yx.model.Userinfo;
 
 @SpringBootTest
-public class IHouseServiceTest {
-	private Logger log = LoggerFactory.getLogger(IHouseServiceTest.class);
+public class HouseServiceTest {
+	private Logger log = LoggerFactory.getLogger(HouseServiceTest.class);
 	
 
 	@Autowired
-	private IHouseService houseService;
+	private HouseService houseService;
 	
 	
 	@Test
@@ -37,6 +37,18 @@ public class IHouseServiceTest {
 			log.info(house.toString());
 			
 		});
+	}
+	
+	
+	@Test
+	public void testUpdate() {
+		
+		House house =   houseService.findById(3L);
+		
+		house.setNumbers("D10011");
+		
+		houseService.updateById(house);
+		
 	}
 	
 	

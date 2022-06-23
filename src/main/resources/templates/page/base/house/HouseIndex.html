@@ -107,7 +107,7 @@
             return false;
         });
         
-        function setFormValues(data){
+        /**function setFormValues(data){
             form.val("updateSubmit",{
                	id:data.houseId,
                 "numbers":data.numbers,
@@ -226,12 +226,12 @@
                 var index=openPage(content,"编辑房屋",'70%','70%');
 				
                 //渲染数据
-                console.log("-----"+index);
-                console.log("+++++"+data);
+                //console.log("-----"+index);
+                //console.log("+++++"+data);
                 setFormValues(data);
                 $(window).on("resize", function () {
                     layer.full(index);
-                    console.log("-----"+index);
+                   // console.log("-----"+index);
                 });
                 
                 return false;
