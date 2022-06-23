@@ -7,14 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author cuijianhui
- * @since 2020-12-08
- */
+
 @Component("buildingDao")
 public interface BuildingMapper extends BaseMapper<Building> {
 
