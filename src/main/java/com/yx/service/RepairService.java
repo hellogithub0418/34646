@@ -13,7 +13,7 @@ public interface RepairService extends IService<Repair> {
 
     PageInfo<Repair> findRepairAll(int page, int pagesise, Repair repair);
 
-    List<Repair> queryList();
+    List<Repair> queryListAll();
     /**
      * 查询分页数据
      *
@@ -54,6 +54,7 @@ public interface RepairService extends IService<Repair> {
      * @return Repair
      */
     Repair findById(Long id);
+
 
 
 }

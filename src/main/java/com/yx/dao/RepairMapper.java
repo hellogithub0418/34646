@@ -11,4 +11,6 @@ import com.yx.model.Repair;
 public interface RepairMapper extends BaseMapper<Repair>{
 	List<Repair> queryListAll(Repair repair);
 
+
+
 }

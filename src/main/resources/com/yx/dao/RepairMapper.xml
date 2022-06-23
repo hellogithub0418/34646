@@ -21,9 +21,9 @@
 
    
 
-    <select id="queryRepairAll" parameterType="com.yx.model.Repair" resultMap="BaseResultMap">
+    <select id="queryListAll" parameterType="com.yx.model.Repair" resultMap="BaseResultMap">
    
-
+		select * from repair
     </select>
 
 

@@ -30,7 +30,7 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
     }
 
     @Override
-    public List<Repair> queryList() {
+    public List<Repair> queryListAll() {
         return repairDao.queryListAll(null);
     }
 

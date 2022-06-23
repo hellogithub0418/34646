@@ -1,5 +1,6 @@
 package com.yx.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,14 +21,28 @@ private Logger log = LoggerFactory.getLogger(RepairServiceTest.class);
 
 	@Autowired
 	RepairService repairService;
+	
+	
 	@Test
 	public void testList() {
-		QueryWrapper<Repair> queryWrapper = new QueryWrapper<Repair>();
+		QueryWrapper<Repair> queryWrapper = new QueryWrapper<>();
 
 		PageInfo<Repair>  pageInfo  =  repairService.findRepairAll(1, 10, null);
 		
 		pageInfo.getList().forEach(System.out::println);
 	   	
 		
+	}
+	
+	@Test
+	public void testDelete() {
+		List<House> list = new ArrayList<>();
+//		list.insert(new House(1));
+		int count =  repairService.delete(1L);
+		if(count==1) {
+			log.info("删除成功");
+		}else {
+			log.info("删除失败");
+		}
 	}
 }

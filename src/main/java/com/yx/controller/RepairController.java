@@ -47,7 +47,7 @@ public class RepairController {
 
     }
 
-    @RequestMapping("/queryRepairAll2")
+    /**@RequestMapping("/queryRepairAll2")
     public JsonObject queryRepairAll2(Repair repair, HttpServletRequest request,
                                      @RequestParam(defaultValue = "1") Integer page,
                                       @RequestParam(defaultValue = "15") Integer limit){
@@ -62,7 +62,7 @@ public class RepairController {
         PageInfo<Repair> pageInfo=repairService.findRepairAll(page,limit,repair);
         return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
 
-    }
+    }*/
 
     @RequestMapping("/queryAll")
     public List<RepairCost> queryAll(){
