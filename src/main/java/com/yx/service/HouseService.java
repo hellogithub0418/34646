@@ -66,4 +66,5 @@ public interface HouseService extends IService<House> {
     House findById(Long id);
 
     House queryHouseById(Integer houId);
+
 }
