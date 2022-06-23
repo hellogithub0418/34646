@@ -9,6 +9,6 @@ import com.yx.model.Repair;
 
 @Component("RepairDao")
 public interface RepairMapper extends BaseMapper<Repair>{
-	List<Repair> findRepairAll(Repair repair);
+	List<Repair> queryListAll(Repair repair);
 
 }

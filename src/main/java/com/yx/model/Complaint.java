@@ -35,7 +35,7 @@ public class Complaint implements Serializable{
     private Date handleDate;
 	private Integer ownerId;
 	private Integer status;
-	private Integer handler;
+	private String handler;
 	private String remarks;
 	
 }

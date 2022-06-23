@@ -14,7 +14,7 @@
  Date: 14/12/2021 04:04:39
 */
 
-SET NAMES utf8mb4;
+SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -42,7 +42,7 @@ INSERT INTO `building` VALUES (11, '18栋', '2单元', '无');
 DROP TABLE IF EXISTS `carcharge`;
 CREATE TABLE `carcharge`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `pay_date` datetime(0) NULL DEFAULT NULL,
+  `pay_date` datetime NULL DEFAULT NULL,
   `end_date` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `money` double(10, 2) NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT NULL,
@@ -66,7 +66,7 @@ INSERT INTO `carcharge` VALUES (8, '2020-10-31 16:00:00', '2020-11-30', 300.00, 
 DROP TABLE IF EXISTS `clockin`;
 CREATE TABLE `clockin`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `clock_in_time` datetime(0) NULL DEFAULT NULL,
+  `clock_in_time` datetime NULL DEFAULT NULL,
   `owner_id` int(0) NULL DEFAULT NULL,
   `house_id` int(0) NULL DEFAULT NULL,
   `building_id` int(0) NULL DEFAULT NULL,
@@ -89,7 +89,7 @@ INSERT INTO `clockin` VALUES (15, '2021-04-27 07:35:23', 2, 2, 7);
 DROP TABLE IF EXISTS `clockinnew`;
 CREATE TABLE `clockinnew`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `report_date` datetime(0) NULL DEFAULT NULL,
+  `report_date` datetime NULL DEFAULT NULL,
   `owner_id` int(0) NULL DEFAULT NULL,
   `type1` int(0) NULL DEFAULT NULL COMMENT '是否为疑似病例如咳嗽，发热（0或1）',
   `type2` int(0) NULL DEFAULT NULL COMMENT '是否确诊为肺炎病例',
@@ -114,8 +114,8 @@ DROP TABLE IF EXISTS `complaint`;
 CREATE TABLE `complaint`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `com_id` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `com_date` datetime(0) NULL DEFAULT NULL,
-  `handle_date` datetime(0) NULL DEFAULT NULL,
+  `com_date` datetime NULL DEFAULT NULL,
+  `handle_date` datetime NULL DEFAULT NULL,
   `owner_id` int(0) NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT NULL,
   `clr` int(0) NULL DEFAULT NULL COMMENT '处理人',
@@ -157,7 +157,7 @@ CREATE TABLE `house`  (
   `storey` int(0) NULL DEFAULT NULL,
   `numbers` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT NULL,
-  `into_date` datetime(0) NULL DEFAULT NULL,
+  `into_date` datetime NULL DEFAULT NULL,
   `building_id` int(0) NULL DEFAULT NULL,
   `remarks` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `area` double(10, 2) NULL DEFAULT NULL,
@@ -179,7 +179,7 @@ DROP TABLE IF EXISTS `notice`;
 CREATE TABLE `notice`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `content` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `fbdate` datetime(0) NULL DEFAULT NULL,
+  `fbdate` datetime NULL DEFAULT NULL,
   `fbr` int(0) NULL DEFAULT NULL,
   `remarks` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT NULL,
@@ -237,8 +237,8 @@ CREATE TABLE `property_info`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `type_id` int(0) NULL DEFAULT NULL,
   `money` double(10, 2) NULL DEFAULT NULL,
-  `start_date` datetime(0) NULL DEFAULT NULL,
-  `end_date` datetime(0) NULL DEFAULT NULL,
+  `start_date` datetime NULL DEFAULT NULL,
+  `end_date` datetime NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT NULL,
   `house_id` int(0) NULL DEFAULT NULL,
   `remarks` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -289,9 +289,9 @@ CREATE TABLE `records`  (
   `num` double(5, 2) NULL DEFAULT NULL,
   `num2` double(5, 2) NULL DEFAULT NULL,
   `house_id` int(0) NULL DEFAULT NULL,
-  `up_time` datetime(0) NULL DEFAULT NULL,
-  `on_time` datetime(0) NULL DEFAULT NULL,
-  `check_time` datetime(0) NULL DEFAULT NULL,
+  `up_time` datetime NULL DEFAULT NULL,
+  `on_time` datetime NULL DEFAULT NULL,
+  `check_time` datetime NULL DEFAULT NULL,
   `meter` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -311,8 +311,8 @@ DROP TABLE IF EXISTS `repair`;
 CREATE TABLE `repair`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `com_id` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `com_date` datetime(0) NULL DEFAULT NULL,
-  `handle_date` datetime(0) NULL DEFAULT NULL,
+  `com_date` datetime NULL DEFAULT NULL,
+  `handle_date` datetime NULL DEFAULT NULL,
   `owner_id` int(0) NULL DEFAULT NULL,
   `status` int(0) NULL DEFAULT NULL,
   `clr` int(0) NULL DEFAULT NULL,

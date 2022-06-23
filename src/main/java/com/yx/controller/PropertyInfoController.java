@@ -35,9 +35,8 @@ import com.yx.service.PropertyService;
 @RequestMapping("/propertyinfo")
 public class PropertyInfoController {
 	private Logger log = LoggerFactory.getLogger(getClass());
-	
-	@Resource
-	//@Autowired
+
+	@Autowired
 	private PropertyService propertyService;
 	
     

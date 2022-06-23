@@ -19,11 +19,6 @@ public class RepairMapperTest {
 
 	@Test
 	public void testList() {
-		List<Repair> list = repairMapper.findRepairAll(null);
-
-		list.forEach(qepair -> {
-			//System.out.println(house);
-			log.info(qepair.toString());
-		});
+		
 	}
 }

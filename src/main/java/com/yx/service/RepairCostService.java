@@ -5,29 +5,29 @@ import java.util.List;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
-import com.yx.model.Parking;
+import com.yx.model.RepairCost;
 
+public interface RepairCostService extends IService<RepairCost>{
 
-public interface ParkingService extends IService<Parking> {
+    PageInfo<RepairCost> findRepairAll(int page, int pagesise, RepairCost repairCost);
 
-    PageInfo<Parking> findParkAll(int page, int pageSize, String numbers);
-
+    List<RepairCost> queryList();
     /**
      * 查询分页数据
      *
      * @param page      页码
      * @param pageCount 每页条数
-     * @return IPage<Parking>
+     * @return IPage<Repair>
      */
-    IPage<Parking> findListByPage(Integer page, Integer pageCount);
+    IPage<RepairCost> findListByPage(Integer page, Integer pageCount);
 
     /**
      * 添加
      *
-     * @param parking 
+     * @param repair 
      * @return int
      */
-    int add(Parking parking);
+    int add(RepairCost repairCost);
 
     /**
      * 删除
@@ -40,21 +40,18 @@ public interface ParkingService extends IService<Parking> {
     /**
      * 修改
      *
-     * @param parking 
+     * @param repair 
      * @return int
      */
-    int updateData(Parking parking);
+    int updateData(RepairCost repairCost);
 
     /**
      * id查询数据
      *
      * @param id id
-     * @return Parking
+     * @return Repair
      */
-    Parking findById(Long id);
+    RepairCost findById(Long id);
 
-    List<Parking> queryParkingAll();
 
-    List<Parking> queryParkingByStatus();
 }
-

@@ -1,53 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yx.dao.ParkingMapper">
-	<resultMap id="BaseResultMap" type="com.yx.model.Parking">
-		<id column="park_id" property="parkId" />
-		<result column="park_id" property="numbers" />
-		<result column="status" property="status" />
-		<result column="owner_id" property="ownerId" />
-		<result column="remarks" property="remarks" />
-	</resultMap>
 
-	<!-- 通用查询结果列 -->
-	<sql id="Base_Column_List">
-		park_id, numbers, status, owner_id, remarks
-	</sql>
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.yx.model.Parking">
+                    <id column="park_id" property="parkingId"/>
+                    <result column="numbers" property="numbers"/>
+                    <result column="status" property="status"/>
+                    <result column="owner_id" property="ownerId"/>
+                    <result column="remarks" property="remarks"/>
+        </resultMap>
 
-	<select id="findById" parameterType="int"
-		resultType="com.yx.model.Parking">
-		select * from parking where park_id = #{park_id}
-	</select>
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            park_id, numbers, status, owner_id, remarks
+        </sql>
 
-	<insert id="add" parameterType="com.yx.model.Parking">
-		<!-- 前面是数据库的列名 -->
-		insert into
-		parking(park_id,numbers,status,owner_id,remarks)
-		<!-- 后的是java类的属性名 -->
-		values(#{park_id},#{numbers},#{status},#{owner_id},#{remarks})
-	</insert>
+       <resultMap id="queryParkAllMap" type="com.yx.model.Parking" extends="BaseResultMap">
+       
+            <!--  一对一多表关联查询数据绑定 -->
+           <association property="owner" javaType="com.yx.model.Owner">
+               <id column="owner_id" property="ownerId"></id>
+               <result property="username" column="username"></result>
+               <result property="tel" column="tel"></result>
+           </association>
+       </resultMap>
 
-	<update id="edit" parameterType="com.yx.model.Parking">
-		update parking
-		<set>
-			<!-- test里面的变量是java类的属性 -->
-			<if test="parkId != null"> park_id =#{park_id},</if>
-			<if test="numbers != null"> numbers =#{numbers},</if>
-			<if test="status != null"> status =#{status},</if>
-			<if test="ownerId != null"> owner_id =#{owner_id},</if>
-			<if test="remarks != null"> remarks =#{remarks},</if>
-		</set>
-		<!-- 严重警告：update必须带where条件 -->
-		where park_id = #{park_id}
-	</update>
 
-	<delete id="deleteByIds" parameterType="list">
-		delete from parking
-		<where>
-			<foreach item="parking" index="index" collection="list"
-				open="parkId in (" separator="," close=")">
-				#{parking.park_id}
-			</foreach>
-		</where>
-	</delete>
+       <select id="queryParkAll" parameterType="string" resultMap="queryParkAllMap">
+           SELECT
+            park.*, ow.username,
+            ow.tel
+        FROM
+            parking park
+        LEFT JOIN  OWNER ow ON ow.owner_id = park.owner_id
+        <where>
+            <if test="numbers!=null and numbers!=''">
+                 and numbers like '%${numbers}%'
+            </if>
+        </where>
+
+       </select>
+
+
+    <select id="queryParkAllByStatus" resultType="com.yx.model.Parking">
+       select * from parking where status=1 and owner_id is not null
+    </select>
+
+
 </mapper>
