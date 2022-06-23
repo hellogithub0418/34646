@@ -50,5 +50,4 @@ public class House implements Serializable {
     private Double area;
 
 
-
 }

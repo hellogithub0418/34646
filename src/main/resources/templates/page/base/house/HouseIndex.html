@@ -44,7 +44,7 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'houseId', width: 80, title: 'ID', sort: true},
+                {field: 'houseId', width: 80, title: 'ID'},
                 {field: 'numbers', width: 80, title: '房号'},
                 {field: 'area', width: 80, title: '面积'},
                 {field: 'intoDate', width: 150, title: '入住时间'},
@@ -140,6 +140,7 @@
                  */
                 var checkStatus=table.checkStatus(obj.config.houseId);
                 var data =checkStatus.data;
+              	console.log("++++++++"+data);
                 if(data.length==0){
                     layer.msg("请选择要删除的记录信息");
                 }else{
