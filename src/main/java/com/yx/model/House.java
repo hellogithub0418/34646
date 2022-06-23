@@ -26,8 +26,8 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="House对象", description="")
-public class House implements Serializable {
+@ApiModel(value = "House对象",description ="" )
+public class House implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -48,6 +48,5 @@ public class House implements Serializable {
     private String remarks;
 
     private Double area;
-
 
 }

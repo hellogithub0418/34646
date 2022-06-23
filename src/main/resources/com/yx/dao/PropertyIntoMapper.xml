@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yx.dao.PropertyIntoMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.yx.model.PropertyInto">
+                    <id column="id" property="id"/>
+                    <result column="time" property="time"/>
+                    <result column="type" property="type"/>
+                    <result column="price" property="price"/>
+                    <result column="building_id" property="buildingId"/>
+                    <result column="remarks" property="remarks"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            id, time,type, price, building_id, remarks
+        </sql>
+
+    <select id="queryListAll" parameterType="com.yx.model.PropertyInto" resultType="com.yx.model.PropertyInto">
+        select * from property_into
+    </select>
+    
+
+</mapper>

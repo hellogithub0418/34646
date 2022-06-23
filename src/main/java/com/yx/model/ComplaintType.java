@@ -18,20 +18,14 @@ public class ComplaintType implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5865472496881139107L;
-	@TableId(value = "id", type = IdType.AUTO)
-	private Integer id;
-	private String name;
-	private String remarks;
-	private Integer status;
-	public ComplaintType(Integer id) {
-		super();
-		this.id = id;
-	}
+    private static final long serialVersionUID = 1L;
 
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
+    private String name;
 
-	public ComplaintType() {
-		super();
-	}
+    private String remarks;
+
+    private Integer status;
 }

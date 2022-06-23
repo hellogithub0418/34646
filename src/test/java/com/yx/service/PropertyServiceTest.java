@@ -1,4 +1,4 @@
-package com.yx.dao;
+package com.yx.service;
 
 import java.util.List;
 
@@ -11,25 +11,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yx.model.Owner;
-import com.yx.model.PropertyInfo;
+import com.yx.dao.UserinfoMapperTest;
+import com.yx.model.PropertyInto;
 import com.yx.model.Userinfo;
 
 @SpringBootTest
-public class OwnerMapperTest {
-	private Logger log = LoggerFactory.getLogger(OwnerMapperTest.class);
-	
+public class PropertyServiceTest {
+	private Logger log = LoggerFactory.getLogger(PropertyServiceTest.class);
 	@Autowired
-	private OwnerMapper ownerMapper;
+	private PropertyIntoService propertyIntoService;
 	
 	@Test
 	public void testList() {
-		Owner owner = new Owner();
-		List<Owner> list = ownerMapper.queryOwnerAll(owner);
-		for (Owner owner2: list) {
-			log.info(owner2.toString());
-		}
-		//List<Owner> queryOwnerAll(Owner owner);
+		
+		PropertyInto propertyInto = new PropertyInto();
+		propertyInto.setBuildingId(1);
+		propertyInto.setPrice((double) 500);
+		propertyInto.setRemarks(null);
+		propertyInto.setTime(null);
+		propertyInto.setType(1);
+		propertyIntoService.add(propertyInto);
 
 	}
 
