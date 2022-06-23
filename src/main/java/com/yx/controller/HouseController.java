@@ -3,7 +3,7 @@ package com.yx.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
 import com.yx.model.House;
-import com.yx.service.IHouseService;
+import com.yx.service.HouseService;
 import com.yx.util.JsonObject;
 import com.yx.util.R;
 import io.swagger.annotations.Api;
@@ -34,7 +34,7 @@ public class HouseController {
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private IHouseService houseService;
+    private HouseService houseService;
 
     @RequestMapping("/houseAll")
     public JsonObject queryHouseAll(String numbers,
@@ -68,7 +68,7 @@ public class HouseController {
     }
 
     @ApiOperation(value = "删除")
-    @RequestMapping("/deleteByIds")
+    @PostMapping("/deleteByIds")
     public R delete(String  ids){
         List<String> list= Arrays.asList(ids.split(","));
         //遍历遍历进行删除
@@ -79,7 +79,7 @@ public class HouseController {
     }
 
     @ApiOperation(value = "更新")
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public R update(@RequestBody House house){
     	log.info("++++++++++"+house.toString());
         if(house.getIntoDate()!=null){

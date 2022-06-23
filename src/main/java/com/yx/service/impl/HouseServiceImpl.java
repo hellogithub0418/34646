@@ -8,7 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yx.dao.HouseMapper;
 import com.yx.model.House;
-import com.yx.service.IHouseService;
+import com.yx.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ import java.util.List;
  * @since 2020-12-08
  */
 @Service
-public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements IHouseService {
+public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements HouseService {
     @Autowired
     private HouseMapper houseDao;
     @Override
