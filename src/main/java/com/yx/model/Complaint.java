@@ -32,17 +32,9 @@ public class Complaint implements Serializable{
 	private Date handleDate;
 	private Integer ownerId;
 	private Integer status;
-	private Integer handler;
+	private String handler;
 	private String remarks;
+	private Owner owner;
+    private ComplaintType type;
 	
-	public Complaint(Integer id) {
-		super();
-		this.id = id;
-	}
-
-
-
-	public Complaint() {
-		super();
-	}
 }

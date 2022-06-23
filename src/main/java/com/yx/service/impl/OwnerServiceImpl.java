@@ -71,5 +71,8 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
         ownerMapper.deleteOwnerByOwnerIds(id);
     }
     
-
+    @Override
+    public Owner queryOwnerByName(String username) {
+        return ownerMapper.queryOwnerByName(username);
+    }
 }

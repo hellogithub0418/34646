@@ -1,33 +1,32 @@
 package com.yx.service;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
-import com.yx.model.Parking;
+import com.yx.model.Complaint;
 
 
-public interface ParkingService extends IService<Parking> {
+public interface ComplaintService extends IService<Complaint> {
 
-    PageInfo<Parking> findParkAll(int page, int pageSize, String numbers);
 
+    PageInfo<Complaint> findComplaintAll(int page, int pagesise, Complaint complaint);
     /**
      * 查询分页数据
      *
      * @param page      页码
      * @param pageCount 每页条数
-     * @return IPage<Parking>
+     * @return IPage<Complaint>
      */
-    IPage<Parking> findListByPage(Integer page, Integer pageCount);
+    IPage<Complaint> findListByPage(Integer page, Integer pageCount);
+
 
     /**
      * 添加
      *
-     * @param parking 
+     * @param complaint 
      * @return int
      */
-    int add(Parking parking);
+    int add(Complaint complaint);
 
     /**
      * 删除
@@ -40,21 +39,16 @@ public interface ParkingService extends IService<Parking> {
     /**
      * 修改
      *
-     * @param parking 
+     * @param complaint 
      * @return int
      */
-    int updateData(Parking parking);
+    int updateData(Complaint complaint);
 
     /**
      * id查询数据
      *
      * @param id id
-     * @return Parking
+     * @return Complaint
      */
-    Parking findById(Long id);
-
-    List<Parking> queryParkingAll();
-
-    List<Parking> queryParkingByStatus();
+    Complaint findById(Long id);
 }
-

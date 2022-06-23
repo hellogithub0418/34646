@@ -21,5 +21,6 @@ public interface OwnerMapper extends BaseMapper<Owner> {
     void deleteOwnerByOwnerIds(@Param("id") Integer id);
 
     Owner queryOwnerById(@Param("id") long parseLong);
+    Owner queryOwnerByName(@Param("username") String username);
 }
 

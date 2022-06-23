@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -23,19 +24,14 @@ public class Repair implements Serializable{
 	@TableId(value = "repairId", type = IdType.AUTO)
 	private Integer repairId;
 	private Integer buildingId;
+	
 	private String problem;
+	@JsonFormat( timezone="GMT+8", pattern="yyyy-MM-dd")
 	private Date reportTime;
+	@JsonFormat( timezone="GMT+8", pattern="yyyy-MM-dd")
 	private Date handleTime;
 	private Integer status;
 	private String remarks;
-	public Repair(Integer repairId) {
-		super();
-		this.repairId = repairId;
-	}
-
-
-
-	public Repair() {
-		super();
-	}
+	private Building building;
+    
 }

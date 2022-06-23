@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yx.dao.RepairMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.yx.model.Repair">
+                    <id column="repair_id" property="repairId"/>
+                    <result column="building_id" property="buildingId"/>
+                    <result column="problem" property="problem"/>
+                    <result column="report_time" property="reportTime"/>
+                    <result column="handle_time" property="handleTime"/>
+                    <result column="status" property="status"/>
+                    <result column="remarks" property="remarks"/>
+                    
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            repair_id, building_id, problem, report_time, handle_time, status, remarks
+        </sql>
+
+   
+
+    <select id="queryRepairAll" parameterType="com.yx.model.Repair" resultMap="queryRepairAllMap">
+        SELECT
+        rep.*, bu.building_name,bu.uints,bu.remarks,
+        type. NAME
+        FROM
+        REPAIR rep
+        
+        LEFT JOIN building bu ON bu.building_id = rep.building_id
+
+        <where>
+            <if test="comId!=null">
+                and report_time=#{reportTime}
+            </if>
+            <if test="status!=null ">
+                and rep.status=#{status}
+            </if>
+            
+        </where>
+
+    </select>
+
+
+    
+
+
+</mapper>

@@ -23,15 +23,6 @@ public class ComplaintType implements Serializable{
 	private Integer id;
 	private String name;
 	private String remarks;
-	private Integer status;
-	public ComplaintType(Integer id) {
-		super();
-		this.id = id;
-	}
-
-
-
-	public ComplaintType() {
-		super();
-	}
+	
+	
 }

@@ -17,7 +17,7 @@
       "child": [
         {
           "title": "车位费查询",
-          "href": "page/other/CarParkIndex2.html",
+          "href": "page/base/carcharge/carcharge2.html",
           "icon": "fa fa-dashboard",
           "target": "_self"
         },
@@ -29,13 +29,13 @@
         },
         {
           "title": "我的投诉列表",
-          "href": "page/other/ComplaintIndex2.html",
+          "href": "page/base/complaint/complaint2.html",
           "icon": "fa fa-dot-circle-o",
           "target": "_self"
         },
         {
           "title": "我的报修列表",
-          "href": "page/other/RepairIndex2.html",
+          "href": "page/base/repair/repair2.html",
           "icon": "fa fa-adn",
           "target": "_self"
         }
