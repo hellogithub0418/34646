@@ -1,9 +1,12 @@
 package com.yx.service;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.yx.model.Carcharge;
+import com.yx.model.ComplaintType;
 
 public interface CarchargeService extends IService<Carcharge>{
 
@@ -50,4 +53,5 @@ public interface CarchargeService extends IService<Carcharge>{
      * @return Carcharge
      */
     Carcharge findById(Long id);
+    List<Carcharge> queryCarcharge();
 }
