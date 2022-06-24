@@ -7,6 +7,8 @@ import com.yx.model.House;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 /**
  * <p>
  *  服务类
@@ -66,4 +68,14 @@ public interface HouseService extends IService<House> {
     House findById(Long id);
 
     House queryHouseById(Integer houId);
+    
+    /**
+     * 查询房间数量
+     * @param buildingId
+     * @return
+     */
+    int queryCountH(Integer buildingId);
+    
+    List<House> queryHouseIdByBid(@Param("buildingId") Integer buildingId);
+    
 }

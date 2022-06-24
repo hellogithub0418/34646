@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -56,5 +57,18 @@ public class HouseServiceTest {
 		
 	}
 	
-	
+	@Test
+	@Transactional
+	public void testquery() {
+		//houseMapper.queryCountHouse(1);
+		log.info("查询房间数量"+houseService.queryCountH(1));
+		
+	}
+	@Test
+	@Transactional
+	public void testqueryhouseId() {
+		//houseMapper.queryCountHouse(1);
+		log.info("查询房间"+houseService.queryHouseIdByBid(1));
+		
+	}
 }

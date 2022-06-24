@@ -65,7 +65,7 @@ public class HouseMapperTest {
 	@Test
 	@Transactional
 	public void testUpDate() {
-		
+		log.info("查询房间"+houseMapper.queryHouseIdByBid(2));
 		
 	}
 

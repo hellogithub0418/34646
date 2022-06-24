@@ -30,4 +30,9 @@
     <select id="queryHouseById" resultType="com.yx.model.House" parameterType="Integer">
         select * from house where house_id = #{houseId}
     </select>
+    
+    <!-- 通过buildingId查询houseId -->
+    <select id="queryHouseIdByBid" parameterType="Integer" resultType="com.yx.model.House">
+    SELECT house_id FROM house WHERE building_id = #{buildingId}
+    </select>
 </mapper>
