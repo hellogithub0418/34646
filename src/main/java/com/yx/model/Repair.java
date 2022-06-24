@@ -21,7 +21,7 @@ public class Repair implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -6929869583824216663L;
-	@TableId(value = "repairId", type = IdType.AUTO)
+	@TableId(value = "repair_id", type = IdType.AUTO)
 	private Integer repairId;
 	private Integer buildingId;
 	
@@ -33,5 +33,8 @@ public class Repair implements Serializable{
 	private Integer status;
 	private String remarks;
 	private Building building;
+	private String buildingName;
+	private String uints;
+	private String username;
     
 }

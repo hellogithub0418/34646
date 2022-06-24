@@ -11,6 +11,10 @@
                     <result column="handle_time" property="handleTime"/>
                     <result column="status" property="status"/>
                     <result column="remarks" property="remarks"/>
+                    <result column="building_name" property="buildingName"/>
+                     <result column="uints" property="uints"/>
+                     <result column="username" property="username"/>
+                     
                     
         </resultMap>
 
@@ -18,12 +22,14 @@
         <sql id="Base_Column_List">
             repair_id, building_id, problem, report_time, handle_time, status, remarks
         </sql>
-
-   
-
+    
     <select id="queryListAll" parameterType="com.yx.model.Repair" resultMap="BaseResultMap">
-   
-		select * from repair
+ 
+		select re.*,bu.building_name, bu.uints, ow.username  
+		from  repair re 
+		join  building bu on re.building_id = bu.building_id 
+		join house ho on bu.building_id = ho.building_id 
+		join owner ow on ho.house_id=ow.house_id
     </select>
 
 

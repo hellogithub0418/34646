@@ -43,6 +43,7 @@ public class RepairController {
 
 
         PageInfo<Repair> pageInfo=repairService.findRepairAll(page,limit,repair);
+        log.info("///////"+pageInfo.toString());
         return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
 
     }
@@ -72,15 +73,17 @@ public class RepairController {
 
     @RequestMapping("/deleteByIds")
     public R deleteByIds(String ids){
+    	log.info("++++++"+ids.toString());
        List<String> list= Arrays.asList(ids.split(","));
-       for(String id:list){
-           repairService.delete(Long.parseLong(id));
+       log.info("======="+list.toString());
+       for(String repairId:list){
+           repairService.delete(Long.parseLong(repairId));
        }
 
        return R.ok();
     }
 
-    @ApiOperation(value = "新增")
+   /** @ApiOperation(value = "新增")
     @RequestMapping("/add")
     public R add(@RequestBody Repair repair,HttpServletRequest request)
     {
@@ -100,13 +103,13 @@ public class RepairController {
             return  R.ok();
         }
         return R.fail("新增失败");
-    }
+    }*/
 
     @ApiOperation(value = "更新")
     @RequestMapping("/update")
-    public R update(Integer id){
+    public R update(Integer repairId){
          Repair repair=new Repair();
-         repair.setRepairId(id);
+         repair.setRepairId(repairId);
          repair.setStatus(1);
          repair.setHandleTime(new Date());
          int num=repairService.updateData(repair);

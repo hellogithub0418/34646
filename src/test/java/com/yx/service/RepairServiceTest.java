@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
@@ -31,10 +32,20 @@ private Logger log = LoggerFactory.getLogger(RepairServiceTest.class);
 		
 		pageInfo.getList().forEach(System.out::println);
 	   	
+	}
+	
+	
+	@Test
+	public void testListAll() {
+		List<Repair> list = repairService.queryListAll();
 		
+		list.forEach(repair->{
+			log.info(repair.toString());
+		});
 	}
 	
 	@Test
+	@Transactional
 	public void testDelete() {
 		List<House> list = new ArrayList<>();
 //		list.insert(new House(1));
@@ -45,4 +56,6 @@ private Logger log = LoggerFactory.getLogger(RepairServiceTest.class);
 			log.info("删除失败");
 		}
 	}
+	
+	
 }

@@ -31,6 +31,8 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
 
     @Override
     public List<Repair> queryListAll() {
+    	
+//    	return baseMapper.select 
         return repairDao.queryListAll(null);
     }
 
@@ -42,6 +44,7 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
 
         return   baseMapper.selectPage(wherePage, Wrappers.query(where));
     }
+    
 
     @Override
     public int add(Repair repair){

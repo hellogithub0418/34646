@@ -32,6 +32,7 @@
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">报修处理</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
             {{# }else{ }}
+			<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">修改</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
             {{# } }}
         </script>
@@ -44,6 +45,7 @@
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
+            data=[],
             miniPage = layui.miniPage;
         table.render({
             elem: '#currentTableId',
@@ -57,10 +59,10 @@
             cols: [[
                 {type: "checkbox", width: 50},
                  {field: 'repairId', width: 80, title: 'ID', sort: true},
-                {templet:'<div>{{d.building.buildingName}}</div>',width: 120, title: '楼宇'},
-                {templet:'<div>{{d.building.uints}}</div>',width: 120, title: '单元'},
+                {templet:'<div>{{d.buildingName}}</div>',width: 120, title: '楼宇'},
+                {templet:'<div>{{d.uints}}</div>',width: 120, title: '单元'},
                 {field: 'remarks', width: 120, title: '报修内容'},
-                {templet:'<div>{{d.owner.username}}</div>',width: 100, title: '报修人'},
+                {templet:'<div>{{d.username}}</div>',width: 100, title: '报修人'},
                 {field: 'reportTime', width: 120, title: '报修时间'},
                 {field: 'status', width: 100, title: '处理状态',
                     templet: function(res){
@@ -83,14 +85,31 @@
 
 
         //获取费用类型 并渲染数据到select标签
+        $.get("building/queryBuild",{},function (data) {
+            var list=data;
+            var select =document.getElementById("typeId");
+            if(list!=null || list.size()>0){
+                for(var c in list){
+                    var option=document.createElement("option");
+                    option.setAttribute("value",list[c].buildingId);
+                    option.innerText=list[c].buildingName;
+                    select.appendChild(option);
+                }
+            }
+            form.render('select');
+        },"json");
+        
+        
+
+        //获取费用类型 并渲染数据到select标签
         $.get("repair/queryAll",{},function (data) {
             var list=data;
             var select =document.getElementById("typeId");
             if(list!=null || list.size()>0){
                 for(var c in list){
                     var option=document.createElement("option");
-                    option.setAttribute("value",list[c].id);
-                    option.innerText=list[c].name;
+                    option.setAttribute("value",list[c].repairId);
+                    option.innerText=list[c].buildingName;
                     select.appendChild(option);
                 }
             }
@@ -151,16 +170,27 @@
                   3、发送请求 实现删除功能
                   4、提示成功 并刷新主页
                  */
-                var checkStatus=table.checkStatus(obj.config.id);
-                var data =checkStatus.data;
+                console.log("-------------",obj);
+           		console.log("+++++",table);
+           		console.log("---",data);
+               // var checkStatus=table.checkStatus(obj.config.repairId);
+              //  var data =checkStatus.data;
                 if(data.length==0){
                     layer.msg("请选择要删除的记录信息");
                 }else{
                     //获取要删除id的集合
-                    var ids =getCheckId(data);
+                    //var ids =getCheckId(data);
                     layer.confirm('你确定要删除记录吗？',function (index) {
                          //执行删除功能
-                        deleteByIds($,"repair/deleteByIds",ids,index);
+                         let str="";
+                         for(let i=0;i<data.length;i++){
+                        	 if(i==0){
+                        		 str=str+data[i];
+                        	 }else{
+                        		 str=str+","+data[i];
+                        	 }
+                         }
+                        deleteByIds($,"repair/deleteByIds",str,index);
                     })
 
                 }
@@ -168,22 +198,60 @@
             }
         });
 
+        function setFormValues(data){
+            form.val("updateSubmit",{
+            	repairId:data.repairId,
+                "buildingId":data.buildingId,
+                "problem":data.problem,
+                "reportTime":data.reportTime,
+                "handleTime":data.handleTime,
+                "status":data.status,
+                "remarks":data.remarks,
+                "building":data.building
+            });
+        };
+
 
 
         //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
+        	console.log("+++++",table);
             console.log(obj)
+            if(obj.type=="all"){
+  				if(obj.checked){
+  					for(let j=0;j<table.cache.testReload.length;j++){
+  						data.push(table.cache.testReload[j].repairId);
+  					}
+  				}else{
+  					data=[];
+  				}
+            }else{
+            	if(obj.checked){
+                	data.push(obj.data.repairId);
+                }else{
+                	let i=data.indexOf(obj.data.repairId);
+                	data.splice(i,1)
+                }
+                console.log("//////",data);
+            }
         });
 
 
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-                layer.confirm('现在处理么？', function (index) {
+                layer.confirm('确定要修改吗？', function (index) {
+                	//渲染数据
+                	setFormValues(data);
+                	$(window).on("resize", function () {
+                        layer.full(index);
+                        
+                       // console.log("-----"+index);
+                    });
                     $.ajax({
                         url:"repair/update",
                         type:"post",
-                        data:{'id':data.id},
+                        data:{'repairId':data.repairId},
                         success:function (result) {
                             if(result.code==200){
                                 layer.msg('成功处理',{
@@ -192,7 +260,7 @@
                                 },function () {
                                     //重载父窗口 关闭当前窗口
                                     parent.window.location.reload();
-                                    var iframeIndex=parent.layer.getFrameIndex(window.name);
+                                    var iframeIndex=parent.layer.getFrameIndex(window.buildingName);
                                     parent.layer.close(iframeIndex);
                                 })
                             }else{
@@ -203,7 +271,7 @@
                 });
             } else if (obj.event === 'delete') {
                 layer.confirm('确定是否删除', function (index) {
-                    deleteByIds($,"repair/deleteByIds",data.id,index)
+                    deleteByIds($,"repair/deleteByIds",data.repairId,index)
                 });
             }
         });

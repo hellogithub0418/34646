@@ -1,7 +1,7 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "page/business/park/CarParkIndex.html"
+    "href": "page/base/userinfo/userinfo.html"
   },
   "logoInfo": {
     "title": "小区物业管理",

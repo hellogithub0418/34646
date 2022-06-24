@@ -48,11 +48,10 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'repairId', width: 80, title: 'ID', sort: true},
-                {templet:'<div>{{d.building.buildingName}}</div>',width: 120, title: '楼宇'},
-                {templet:'<div>{{d.building.uints}}</div>',width: 120, title: '单元'},
+                {field: 'buildingId', width: 80, title: 'ID', sort: true},
+                {templet:'<div>{{d.name}}</div>',width: 120, title: '报修类型'},
                 {field: 'remarks', width: 180, title: '报修内容'},
-                {templet:'<div>{{d.owner.username}}</div>',width: 100, title: '报修人'},
+                {templet:'<div>{{d.username}}</div>',width: 100, title: '报修人'},
                 {field: 'comDate', width: 150, title: '报修时间'},
                 {field: 'status', width: 150, title: '处理状态',
                     templet: function(res){
@@ -63,7 +62,7 @@
                         }
                     }
                 },
-                {field: 'handleTime', width: 80, title: '处理时间'},
+                {field: 'clr', width: 80, title: '处理人'},
                 {title: '', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
                 ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -81,7 +80,7 @@
             if(list!=null || list.size()>0){
                 for(var c in list){
                     var option=document.createElement("option");
-                    option.setAttribute("value",list[c].id);
+                    option.setAttribute("value",list[c].repairId);
                     option.innerText=list[c].name;
                     select.appendChild(option);
                 }
@@ -118,7 +117,7 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
            if (obj.event === 'add') {  // 监听添加操作
 
-               var content = miniPage.getHrefContent('page/base/repair/addRepair.html');
+               var content = miniPage.getHrefContent('page/other/addRepair.html');
                var index = openPage(content, "我要报修", '60%', '60%');
                $(window).on("resize", function () {
                    layer.full(index);
