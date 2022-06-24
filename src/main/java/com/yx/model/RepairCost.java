@@ -25,14 +25,5 @@ public class RepairCost implements Serializable{
 	private Integer repairId;
 	private double price;
 	private String remarks;
-	public RepairCost(Integer id) {
-		super();
-		this.id = id;
-	}
 
-
-
-	public RepairCost() {
-		super();
-	}
 }

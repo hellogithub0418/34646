@@ -60,6 +60,6 @@ public interface OwnerService extends IService<Owner> {
     Owner queryOwnerById(long parseLong);
     
     void deleteOwnerByOwnerIds(Integer id);
-    
+
     Owner queryOwnerByName(String username);
 }

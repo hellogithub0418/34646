@@ -29,20 +29,12 @@ public class Carcharge implements Serializable{
 	private Date payDate;
 	@JsonFormat(pattern = "yyyy-MM-dd ",timezone = "GMT+8")
 	private Date endDate;
-	private String money;
+	private double money;
 	private Integer status;
 	private String remarks;
 	private String type;
 	private Integer parkId;
 	
-	public Carcharge(Integer id) {
-		super();
-		this.id = id;
-	}
-
-
-
-	public Carcharge() {
-		super();
-	}
+	
+    private Parking parking;//停车位
 }

@@ -1,5 +1,6 @@
 package com.yx.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,7 @@ public class HouseServiceTest {
 	
 	
 	@Test
+	@Transactional
 	public void testUpdate() {
 		
 		House house =   houseService.findById(3L);
@@ -53,9 +55,19 @@ public class HouseServiceTest {
 	}
 	
 	@Test
-	public void testSelete() {
-		
+	@Transactional
+	public void testDelete() {
+		List<House> list = new ArrayList<>();
+//		list.insert(new House(1));
+		int count =  houseService.delete(3L);
+		if(count==1) {
+			log.info("删除成功");
+		}else {
+			log.info("删除失败");
 	}
+	}
+	
+		
 	
 	@Test
 	@Transactional

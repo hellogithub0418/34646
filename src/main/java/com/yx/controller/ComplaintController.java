@@ -101,11 +101,14 @@ public class ComplaintController {
 
     @ApiOperation(value = "更新")
     @RequestMapping("/update")
-    public R update(Integer id){
+    public R update(Integer id,HttpServletRequest request){
          Complaint complaint=new Complaint();
          complaint.setId(id);
          complaint.setStatus(1);
-//         complaint.setClr()
+         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
+         String username=userinfo.getUsername();
+        complaint.setHandler(username);
+        
         int num= complaintService.updateData(complaint);
         if(num>0){
             return R.ok();
