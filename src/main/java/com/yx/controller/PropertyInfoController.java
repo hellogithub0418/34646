@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,8 @@ import com.github.pagehelper.PageInfo;
 import com.yx.model.House;
 import com.yx.model.Owner;
 import com.yx.model.PropertyInfo;
+import com.yx.model.Userinfo;
+import com.yx.service.OwnerService;
 import com.yx.service.PropertyService;
 
 @RestController
@@ -38,6 +41,10 @@ public class PropertyInfoController {
 
 	@Autowired
 	private PropertyService propertyService;
+	
+	@Resource
+	//@Autowired
+	private OwnerService ownerService;
 	
     
     //查询全部信息
@@ -53,6 +60,23 @@ public class PropertyInfoController {
     	object.setCount(pageInfo.getTotal());
     	object.setData(pageInfo.getList());
     	return object;
+    }
+    
+    //业主端查询自己的物业收费情况
+    @RequestMapping("/queryPropertyAll2")
+    public JsonObject queryPropertyAll2(PropertyInfo propertyInfo, HttpServletRequest request,
+                                       @RequestParam(defaultValue = "1") Integer page,
+                                        @RequestParam(defaultValue = "15") Integer limit){
+        Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
+        String username=userinfo.getUsername();
+        //根据username获取登录账号得业主id
+        Owner owner=ownerService.queryOwnerByName(username);
+        Integer houId= owner.getHouseId();
+        propertyInfo.setHouseId(houId);
+        PageInfo<PropertyInfo> pageInfo=propertyService.findPropertyInfoAll(page,limit,
+                propertyInfo);
+        return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
+
     }
 
     @ApiOperation(value = "查询分页数据")

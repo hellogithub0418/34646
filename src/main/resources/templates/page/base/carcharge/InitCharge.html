@@ -1,7 +1,22 @@
 <div class="layuimini-main">
 
 	<div class="layui-form layuimini-form">
-
+       <div class="layui-form-item">
+            <label class="layui-form-label required">选择业主</label>
+            <div class="layui-input-block">
+                <select name="ownerId" lay-verify="required"  id="ownerId" lay-search="">
+                    <option value="">请选择业主</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">选择车位</label>
+            <div class="layui-input-block">
+                <select name="parkingId" lay-verify="required"  id="parkingId" lay-search="">
+                    <option value="">请选择车位</option>
+                </select>
+            </div>
+        </div>
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label required">费用起始日期</label>
 			<div class="layui-input-block">
@@ -53,8 +68,34 @@
 
 						/**
 						 * 初始化表单，要加上，不然刷新部分组件可能会不加载
-						 */
-						form.render();
+						 */form.render();
+						 $.get("carcharge/queryCarcharge",{},function (data) {
+					            var list=data;
+					            var select =document.getElementById("ownerId");
+					            if(list!=null || list.size()>0){
+					                for(var c in list){
+					                    var option=document.createElement("option");
+					                    option.setAttribute("value",list[c].id);
+					                    option.innerText=list[c].owner.username;
+					                    select.appendChild(option);
+					                }
+					            }
+					            form.render('select');
+					        },"json");
+						//form.render();
+						 $.get("carcharge/queryCarcharge",{},function (data) {
+					            var list=data;
+					            var select =document.getElementById("parkingId");
+					            if(list!=null || list.size()>0){
+					                for(var c in list){
+					                    var option=document.createElement("option");
+					                    option.setAttribute("value",list[c].id);
+					                    option.innerText=list[c].parking.numbers;
+					                    select.appendChild(option);
+					                }
+					            }
+					            form.render('select');
+					        },"json");
 						// 当前弹出层，防止ID被覆盖
 						var parentIndex = layer.index;
 
@@ -63,16 +104,16 @@
 							laydate.render({
 								elem : this,//元素
 								trigger : 'click'//,//怎么触发
-							 type : 'datetime',//格式
-							format : 'yyyy-MM-dd'
+							 //type : 'datetime',//格式
+							//format : 'yyyy-MM-dd'
 							});
 						});
 
-						function getIntervalMonth(date1, date2) {
+						/* function getIntervalMonth(date1, date2) {
 							var date3 = date2.getTime() - date1.getTime() //时间差的毫秒数
 							//计算出相差天数
 							var days = Math.floor(date3 / (24 * 3600 * 1000))
-						}
+						} */
 
 						//监听提交
 						form.on('submit(saveBtn)', function(data) {

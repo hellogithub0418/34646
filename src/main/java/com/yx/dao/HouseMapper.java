@@ -15,9 +15,17 @@ public interface HouseMapper extends BaseMapper<House> {
      */
 
     List<House> findHouseAll(@Param("numbers") String numbers);
+    
+    //int queryCountH(@Param("buildingId")Integer buildingId);
 
     /**
      * 通过owner中house_id查找house
      */
     House queryHouseById(@Param("houId") Integer houId);
+    
+    /**
+     * 通过buildingId查询houseId
+     * 
+     */
+    List<House> queryHouseIdByBid(@Param("buildingId") Integer buildingId);
 }

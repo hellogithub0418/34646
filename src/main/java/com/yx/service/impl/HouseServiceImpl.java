@@ -1,5 +1,6 @@
 package com.yx.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,6 +10,8 @@ import com.github.pagehelper.PageInfo;
 import com.yx.dao.HouseMapper;
 import com.yx.model.House;
 import com.yx.service.HouseService;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +73,22 @@ public class HouseServiceImpl extends ServiceImpl<HouseMapper, House> implements
     @Override
     public House queryHouseById(Integer houId) {
         return houseDao.queryHouseById(houId);
+    }
+    
+    /**
+     * 查询房间数量
+     * @param buildingId
+     * @return
+     */
+    @Override
+    public int queryCountH(Integer buildingId) {
+    	LambdaQueryWrapper<House> wrapper = Wrappers.lambdaQuery(House.class);
+        wrapper.eq(House::getBuildingId	, buildingId);
+        int count = baseMapper.selectCount(wrapper);
+		return count;
+    }
+    @Override
+    public List<House> queryHouseIdByBid(Integer buildingId) {
+    	return houseDao.queryHouseIdByBid(buildingId);
     }
 }

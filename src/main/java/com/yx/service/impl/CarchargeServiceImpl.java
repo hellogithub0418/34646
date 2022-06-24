@@ -13,6 +13,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yx.dao.CarchargeMapper;
 import com.yx.model.Carcharge;
+import com.yx.model.ComplaintType;
 import com.yx.service.CarchargeService;
 
 
@@ -57,5 +58,9 @@ public class CarchargeServiceImpl extends ServiceImpl<CarchargeMapper, Carcharge
     @Override
     public Carcharge findById(Long id){
         return  baseMapper.selectById(id);
+    }
+    @Override
+    public List<Carcharge> queryCarcharge() {
+        return baseMapper.queryCarChargeAll(null);
     }
 }

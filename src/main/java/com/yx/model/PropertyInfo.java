@@ -26,7 +26,7 @@ public class PropertyInfo implements Serializable{
     private  Owner owner;
     private PropertyType ptype;
 	
-	@TableId(value = "id")
+	@TableId(value = "id",type = IdType.AUTO)
 	private Integer id;
 	private Integer type;
 	private Double price;

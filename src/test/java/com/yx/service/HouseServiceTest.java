@@ -69,5 +69,18 @@ public class HouseServiceTest {
 	
 		
 	
-	
+	@Test
+	@Transactional
+	public void testquery() {
+		//houseMapper.queryCountHouse(1);
+		log.info("查询房间数量"+houseService.queryCountH(1));
+		
+	}
+	@Test
+	@Transactional
+	public void testqueryhouseId() {
+		//houseMapper.queryCountHouse(1);
+		log.info("查询房间"+houseService.queryHouseIdByBid(1));
+		
+	}
 }

@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
 import com.yx.model.Carcharge;
-
+import com.yx.model.ComplaintType;
+import com.yx.model.Owner;
 import com.yx.model.Parking;
 import com.yx.model.Userinfo;
 import com.yx.service.CarchargeService;
-
+import com.yx.service.OwnerService;
 import com.yx.service.ParkingService;
 import com.yx.util.JsonObject;
 import com.yx.util.R;
@@ -45,7 +46,8 @@ public class CarchargeController {
     @Resource
     private ParkingService parkingService;
 
-   
+    @Resource
+    private OwnerService ownerService;
 
 
     @RequestMapping("/queryCarchargeAll")
@@ -71,7 +73,8 @@ public class CarchargeController {
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
         String username=userinfo.getUsername();
         //根据username获取登录账号得业主id
-        
+        Owner owner=ownerService.queryOwnerByName(username);
+        carcharge.setOwnerId(owner.getOwnerId());
        
         
         PageInfo<Carcharge> pageInfo=carchargeService.findCarchargeAll(page,limit,carcharge);
@@ -89,13 +92,14 @@ public class CarchargeController {
          * 遍历所有得已在使用得车位信息
          */
         List<Parking> parkingList=parkingService.queryParkingByStatus();
-        for(Parking park:parkingList){
+        //for(Parking park:parkingList){
             carcharge.setStatus(0);
+            //carcharge.setParkId(park.getParkingId());
+           // carcharge.setOwnerId(park.getOwnerId());
             
-            carcharge.setType("停车费");
-            carcharge.setParkId(park.getParkingId());
+            
             carchargeService.add(carcharge);
-        }
+       // }
        return R.ok();
 
     }
@@ -139,6 +143,10 @@ public class CarchargeController {
     @GetMapping("{id}")
     public Carcharge findById(@PathVariable Long id){
         return carchargeService.findById(id);
+    }
+    @RequestMapping("/queryCarcharge")
+    public List<Carcharge> queryCarcharge(){
+       return  carchargeService.queryCarcharge();
     }
 
 }

@@ -1,5 +1,7 @@
 package com.yx.service;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +25,7 @@ public class CarchargeServiceTest {
 	@Test
 		public void testList() {
 			QueryWrapper<Carcharge> queryWrapper = new QueryWrapper<Carcharge>();
-			
-		
-			
 			Page<Carcharge> page = new Page<>(1,10);
-			
 			
 			//List<Parking> userList = parkingService.list(queryWrapper);
 			PageInfo<Carcharge> pageInfo= carchargeService.findCarchargeAll(1,10, null);
@@ -35,14 +33,14 @@ public class CarchargeServiceTest {
 			pageInfo.getList().forEach(System.out::println);
 		}
 	
-	//@Test
-		//@Transactional
-//		public void testAdd() {
-//			
-//			Carcharge carcharge = new Carcharge().setEndDate("2022-01-06").
-//			
-//					carchargeService.add(carcharge);
-//			
-//		}
+	    //@Test
+		@Transactional
+		public void testAdd() {
+			
+			Carcharge carcharge = new Carcharge().setEndDate(new Date()).setMoney(200.33).setPayDate(new Date());
+			
+					carchargeService.add(carcharge);
+			
+		}
 		
 }
