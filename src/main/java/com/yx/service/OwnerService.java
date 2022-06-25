@@ -53,13 +53,13 @@ public interface OwnerService extends IService<Owner> {
      * @param id id
      * @return Owner
      */
-    Owner findById(Long id);
+    Owner findById(Long OwnerId);
     
   //先在owner表通过id查询出相应的username
 	//再通过username删除username表里用户
     Owner queryOwnerById(long parseLong);
     
-    void deleteOwnerByOwnerIds(Integer id);
+    void deleteOwnerByOwnerIds(Integer OwnerId);
 
     Owner queryOwnerByName(String username);
 }

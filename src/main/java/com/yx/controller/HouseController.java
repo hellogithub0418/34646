@@ -3,6 +3,7 @@ package com.yx.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
 import com.yx.model.House;
+import com.yx.model.Owner;
 import com.yx.service.HouseService;
 import com.yx.util.JsonObject;
 import com.yx.util.R;
@@ -111,5 +112,20 @@ public class HouseController {
     public House findById(@PathVariable Long id){
         return houseService.findById(id);
     }
+    
+    @ApiOperation(value = "根据buildingId查询houseID")
+    @PostMapping("/queryHouseIdByBId")
+    public JsonObject queryHouseIdByBId(Integer buildingId){
+    	//return  houseService.queryHouseIdByBid(buildingId);
+    	JsonObject object = new JsonObject();
+    	// pageinfo接受service层传来的结果
+    	List<House> pageInfo = houseService.queryHouseIdByBid(buildingId);
+    	
+    	log.info("是否进来"+pageInfo);
+    	object.setCode(0);
+    	object.setMsg("ok");
+    	object.setData(pageInfo);
+    	return object;
+}
 
 }

@@ -2,9 +2,13 @@
     <div class="layuimini-main">
 
         <div class="demoTable">
-            业主名：
+            电话：
             <div class="layui-inline">
-                <input class="layui-input" name="username"  id="username" autocomplete="off">
+                <input class="layui-input" name="tel"  id="tel" autocomplete="off">
+            </div>
+            身份证号：
+            <div class="layui-inline">
+                <input class="layui-input" name="identity"  id="identity" autocomplete="off">
             </div>
             <button class="layui-btn" data-type="reload">搜索</button>
         </div>
@@ -68,32 +72,53 @@
 
 
         var $ = layui.$, active = {
-            reload: function(){
-                var username = $('#username');
-                //执行重载
-                table.reload('testReload', {
-                    page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-                    ,where: {
-                    	username:username.val(),
+                reload: function(){
+                    var identity = $('#identity');
+                    var tel = $('#tel');
+                    //执行重载
+                    table.reload('testReload', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        ,where: {
+                            identity:identity.val(),
+                            tel:tel.val()
+                        }
+                    }, 'data');
+                }
+            };
 
+            $('.demoTable .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+
+            // 监听搜索操作
+            form.on('submit(data-search-btn)', function (data) {
+                var result = JSON.stringify(data.field);
+                layer.alert(result, {
+                    title: '最终的搜索信息'
+                });
+
+                //执行搜索重载
+                table.reload('currentTableId', {
+                    page: {
+                        curr: 1
+                    }
+                    , where: {
+                        searchParams: result
                     }
                 }, 'data');
-            }
-        };
 
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
+                return false;
+            });
         
         /**
          * toolbar事件监听
          */
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {   // 监听添加操作
-                var content = miniPage.getHrefContent('page/base/userinfo/addUserinfo.html');
+                var content = miniPage.getHrefContent('page/base/owner/addowner.html');
                 var openWH = miniPage.getOpenWidthHeight();
 
                 var index = layer.open({

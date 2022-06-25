@@ -47,8 +47,8 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     }
 
     @Override
-    public int delete(Long id){
-        return baseMapper.deleteById(id);
+    public int delete(Long OwnerId){
+        return baseMapper.deleteById(OwnerId);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     }
 
     @Override
-    public Owner findById(Long id){
-        return  baseMapper.selectById(id);
+    public Owner findById(Long OwnerId){
+        return  baseMapper.selectById(OwnerId);
     }
 
     @Override
@@ -67,8 +67,8 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     }
     
     @Override
-    public void deleteOwnerByOwnerIds(Integer id) {
-        ownerMapper.deleteOwnerByOwnerIds(id);
+    public void deleteOwnerByOwnerIds(Integer OwnerId) {
+        ownerMapper.deleteOwnerByOwnerIds(OwnerId);
     }
     
     @Override

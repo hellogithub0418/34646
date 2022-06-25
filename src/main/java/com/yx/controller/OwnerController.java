@@ -78,6 +78,7 @@ public class OwnerController {
 	@ApiOperation(value = "新增")
     @RequestMapping("/add")
 	public R add(@RequestBody Owner owner) {
+		log.info("测试添加");
 		
 		owner.setPassword("123456");//默认密码123456
         int num= ownerService.add(owner);
@@ -120,11 +121,22 @@ public class OwnerController {
 	
 	
 	
-    @ApiOperation(value = "修改")
+//    @ApiOperation(value = "修改")
+//    @RequestMapping("/update")
+//    public R update(@RequestBody Owner owner){
+//    	ownerService.add(owner);
+//        return R.ok();
+//    }
+//    
+    @ApiOperation(value = "更新")
     @RequestMapping("/update")
     public R update(@RequestBody Owner owner){
-    	ownerService.add(owner);
-        return R.ok();
+        int num= ownerService.updateData(owner);
+        if(num>0){
+            return R.ok();
+        }else{
+            return R.fail("修改失败");
+        }
     }
 	
     @RequestMapping("/queryAll")
@@ -134,9 +146,11 @@ public class OwnerController {
         return pageInfo.getList();
     }
     
-    
-    
-    
-
+    @ApiOperation(value = "id查询")
+    @GetMapping("{id}")
+    public Owner findById(@PathVariable Long id){
+        return ownerService.findById(id);
+    }
+  
 }
 

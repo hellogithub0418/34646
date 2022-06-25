@@ -38,22 +38,7 @@
         FROM owner own
         LEFT JOIN house hou ON hou.house_id= own.house_id 
         LEFT JOIN building bu ON hou.building_id = bu.building_id
-        
-        <where>
-             <if test="username!=null and username !=''">
-                  and username like '%${username}%'
-                  
-             </if>
-        </where>
-      </select>
-    
-      <!-- <select id="queryOwnerAll" parameterType="com.yx.model.Owner"
-              resultMap="queryOwnerAllMap">
-          SELECT
-            own.*, hou.numbers
-        FROM
-            owner own
-        LEFT JOIN house hou ON hou.id = own.house_id
+
         <where>
              <if test="tel!=null and tel !=''">
                   and tel like '%${tel}%'
@@ -62,22 +47,23 @@
                 and identity like '%${identity}%'
              </if>
         </where>
-        order by own.id desc
-      </select>-->
-
-
+      </select>
     <!-- 通过用户名查询owner -->
     <select id="queryOwnerByName" parameterType="string" resultType="com.yx.model.Owner">
         select * from owner where username=#{username}
     </select>
 
     <select id="queryOwnerById" parameterType="long" resultType="com.yx.model.Owner">
-        select * from owner where owner_id=#{id}
+        select * from owner where owner_id=#{OwnerId}
     </select>
     
     	<!-- 删除 -->
 	<delete id="deleteOwnerByOwnerIds" parameterType="String">
-        delete from owner where owner_id=#{id}
+        delete from owner where owner_id=#{OwnerId}
+    </delete>
+    
+    <delete id="deleteOwnerUserByUserName" parameterType="String">
+        delete from owner where username=#{username2}
     </delete>
 
 

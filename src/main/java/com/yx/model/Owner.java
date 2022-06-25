@@ -22,7 +22,7 @@ public class Owner implements Serializable{
 	 * 不一样且不是驼峰之类的对应关系，可以在实体中表示主键的属性上加@Tableid注解，
 	 * 并指定@Tableid注解的value属性值为表中主键的字段名既可以对应上。
 	 */
-	@TableId(value = "owner_id")
+	@TableId(value = "owner_id",type = IdType.AUTO)
 	private Integer ownerId;
 	private String username;
 	private String tel;
