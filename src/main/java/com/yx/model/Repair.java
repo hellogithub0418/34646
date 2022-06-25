@@ -36,5 +36,6 @@ public class Repair implements Serializable{
 	private String buildingName;
 	private String uints;
 	private String username;
+	private String numbers;
     
 }

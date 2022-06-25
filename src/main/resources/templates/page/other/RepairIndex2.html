@@ -2,13 +2,6 @@
     <div class="layuimini-main">
 
         <div class="demoTable layui-form">
-
-            报修类型：
-            <div class="layui-inline">
-                <select name="comId"  id="typeId" lay-verify="required" lay-search="">
-                    <option value="">选择报修类型</option>
-                </select>
-            </div>
             处理状态：
             <div class="layui-inline">
                 <select name="status"  id="status" lay-verify="required" >
@@ -48,11 +41,11 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'buildingId', width: 80, title: 'ID', sort: true},
-                {templet:'<div>{{d.name}}</div>',width: 120, title: '报修类型'},
-                {field: 'remarks', width: 180, title: '报修内容'},
+                {field: 'repairId', width: 80, title: 'ID', sort: true},
+                {templet: '<div>{{d.buildingName}}<div>', width: 180, title: '报修楼宇'},
+                {templet:'<div>{{d.numbers}}</div>',width: 100, title: '报修房屋'},
                 {templet:'<div>{{d.username}}</div>',width: 100, title: '报修人'},
-                {field: 'comDate', width: 150, title: '报修时间'},
+                {field: 'reportTime', width: 150, title: '报修时间'},
                 {field: 'status', width: 150, title: '处理状态',
                     templet: function(res){
                         if(res.status=='0'){
@@ -62,7 +55,6 @@
                         }
                     }
                 },
-                {field: 'clr', width: 80, title: '处理人'},
                 {title: '', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
                 ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -132,8 +124,6 @@
         table.on('checkbox(currentTableFilter)', function (obj) {
             console.log(obj)
         });
-
-
 
     });
 </script>

@@ -48,7 +48,7 @@ public class RepairController {
 
     }
 
-    /**@RequestMapping("/queryRepairAll2")
+    @RequestMapping("/queryRepairAll2")
     public JsonObject queryRepairAll2(Repair repair, HttpServletRequest request,
                                      @RequestParam(defaultValue = "1") Integer page,
                                       @RequestParam(defaultValue = "15") Integer limit){
@@ -63,7 +63,7 @@ public class RepairController {
         PageInfo<Repair> pageInfo=repairService.findRepairAll(page,limit,repair);
         return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
 
-    }*/
+    }
 
     @RequestMapping("/queryAll")
     public List<RepairCost> queryAll(){
@@ -83,7 +83,7 @@ public class RepairController {
        return R.ok();
     }
 
-   /** @ApiOperation(value = "新增")
+    @ApiOperation(value = "新增")
     @RequestMapping("/add")
     public R add(@RequestBody Repair repair,HttpServletRequest request)
     {
@@ -103,7 +103,7 @@ public class RepairController {
             return  R.ok();
         }
         return R.fail("新增失败");
-    }*/
+    }
 
     @ApiOperation(value = "更新")
     @RequestMapping("/update")
