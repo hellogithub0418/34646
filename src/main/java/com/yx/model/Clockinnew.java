@@ -32,6 +32,7 @@ public class Clockinnew implements Serializable {
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     private Date reportDate;
 
+    
     private Integer ownerId;
 
     @ApiModelProperty(value = "是否为疑似病例如咳嗽，发热（0或1）")

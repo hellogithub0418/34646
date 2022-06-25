@@ -41,7 +41,7 @@
               "target": "_self"
             },
             {
-              "title": "物业费详情",
+              "title": "物业费录入记录",
               "href": "page/business/property/properbase.html",
               "icon": "fa fa-dot-circle-o",
               "target": "_self"

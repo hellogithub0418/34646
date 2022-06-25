@@ -122,7 +122,7 @@
                 var openWH = miniPage.getOpenWidthHeight();
 
                 var index = layer.open({
-                    title: '添加管理员',
+                    title: '添加业主',
                     type: 1,
                     shade: 0.2,
                     maxmin:true,
@@ -208,23 +208,30 @@
             console.log(obj.config.id)
         });
       
+        /**
+         * 设计渲染form中的信息值
+         */
+        function setFormValues(data){
+            form.val("updateSubmit",{
+                "id":data.id,
+                "username":data.username,
+                "tel":data.tel,
+                "sex":data.sex,
+                "houseId":data.houseId,
+                "identity":data.identity,
+                "typeIds":data.houseId,
+                "remarks":data.remarks
+            });
+        };
         //监听操作功能
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-                //修改密码
                 var content = miniPage.getHrefContent('page/base/owner/editOwner.html');
-                var openWH = miniPage.getOpenWidthHeight();
-                var index = layer.open({
-                    title: '修改密码',
-                    type: 1,
-                    shade: 0.2,
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['60%','60%'],
-                    content: content,
-                });
-                $("#ownerId").val(data.ownerId);
+                var index=openPage(content,"业主维护",'70%','70%');
+
+                //渲染数据
+                setFormValues(data);
                 $(window).on("resize", function () {
                     layer.full(index);
                 });

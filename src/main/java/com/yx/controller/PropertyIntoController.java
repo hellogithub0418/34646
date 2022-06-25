@@ -149,7 +149,7 @@ public class PropertyIntoController{
 		//buildingId=1 代表全小区
 		
 		else {
-			double prices = propertyInto.getPrice();
+			Double prices = propertyInto.getPrice();
 			//获取全小区所有房间数量
 			List<House> HouseCount = houseService.findList();
 			log.info("前端传来的金额"+prices);
@@ -157,13 +157,13 @@ public class PropertyIntoController{
 			BigDecimal pricesBig = new BigDecimal(prices);
 			BigDecimal countBig = new BigDecimal(HouseCount.size());
 
-			log.info(""+HouseCount.size());
+			log.info("f"+countBig);
 			//获取楼宇下的所房间号
-			//List<House> listHouse = houseService.queryHouseIdByBid(buildingId);
 			
 			
 			//
-			Double averPrices = pricesBig.divide(countBig).doubleValue();
+			Double averPrices = pricesBig.divide(countBig,4,BigDecimal.ROUND_UP).doubleValue();
+			//Double averPrices = pricesBig.divide(countBig).doubleValue();
 			log.info(HouseCount.size()+" === 平均数"+averPrices);
 			//获取的houseId先转成集合对象
 			//List<String> listHouse= Arrays.asList(houseID.toString().split(","));
