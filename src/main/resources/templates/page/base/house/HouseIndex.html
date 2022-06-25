@@ -31,6 +31,7 @@
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
+            data=[],
             miniPage = layui.miniPage;
 
         table.render({
@@ -138,16 +139,26 @@
                   3、发送请求 实现删除功能
                   4、提示成功 并刷新主页
                  */
-                var checkStatus=table.checkStatus(obj.config.houseId);
-                var data =checkStatus.data;
-              	console.log("++++++++"+data);
+                //var checkStatus=table.checkStatus(obj.config.houseId);
+                //var data =checkStatus.data;
+              	//console.log("++++++++"+data);
                 if(data.length==0){
                     layer.msg("请选择要删除的记录信息");
                 }else{
                     //获取要删除id的集合
-                    var ids =getCheckId(data);
+                    //var ids =getCheckId(data);
                     layer.confirm('你确定要删除记录吗？',function (index) {
                          //执行删除功能
+                    	let str="";
+                         
+                        for(let i=0;i<data.length;i++){
+                       	 if(i==0){
+                       		 str=str+data[i];
+                       	 }else{
+                       		 str=str+","+data[i];
+                       	 }
+                        }
+                        ids=str;
                         deleteByIds($,"house/deleteByIds",ids,index);
                     })
 
@@ -202,6 +213,23 @@
         //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
             console.log(obj)
+            if(obj.type=="all"){
+  				if(obj.checked){
+  					for(let j=0;j<table.cache.testReload.length;j++){
+  						data.push(table.cache.testReload[j].houseId);
+  					}
+  				}else{
+  					data=[];
+  				}
+            }else{
+            	if(obj.checked){
+                	data.push(obj.data.houseId);
+                }else{
+                	let i=data.indexOf(obj.data.houseId);
+                	data.splice(i,1)
+                }
+                console.log("//////",data);
+            }
         });
 
         /**

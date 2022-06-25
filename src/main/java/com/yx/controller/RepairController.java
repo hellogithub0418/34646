@@ -3,7 +3,6 @@ package com.yx.controller;
 import com.github.pagehelper.PageInfo;
 import com.yx.model.*;
 import com.yx.service.OwnerService;
-import com.yx.service.RepairCostService;
 import com.yx.service.RepairService;
 
 import com.yx.util.JsonObject;
@@ -30,8 +29,6 @@ public class RepairController {
 
     @Resource
     private RepairService repairService;
-    @Resource
-    private RepairCostService repairCostService;
 
     @Resource
     private OwnerService ownerService;
@@ -66,16 +63,23 @@ public class RepairController {
     }
 
     @RequestMapping("/queryAll")
-    public List<RepairCost> queryAll(){
-       return repairCostService.queryList();
+    public List<JsonObject> queryAll(
+    		Integer typeId,
+    		Integer status
+    		){
+    	System.out.println(typeId+"--------"+status);
+    	return null;
+    	//PageInfo<Repair> pageInfo=repairService.findRepairAll(page,limit,repair);
+        //log.info("///////"+pageInfo.toString());
+        //return new JsonObject(0,"ok",pageInfo.getTotal(),pageInfo.getList());
     }
 
 
     @RequestMapping("/deleteByIds")
     public R deleteByIds(String ids){
-    	log.info("++++++"+ids.toString());
+    	//log.info("++++++"+ids.toString());
        List<String> list= Arrays.asList(ids.split(","));
-       log.info("======="+list.toString());
+       //log.info("======="+list.toString());
        for(String repairId:list){
            repairService.delete(Long.parseLong(repairId));
        }
@@ -89,9 +93,10 @@ public class RepairController {
     {
         
         //获取当前得登录用户
+    	System.out.println("---------------------------"+repair);
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
         String username=userinfo.getUsername();
-
+        System.out.println(username);
         //根据username获取登录账号得业主id
         Owner owner=ownerService.queryOwnerByName(username);
         

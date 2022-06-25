@@ -12,7 +12,8 @@ import java.util.List;
 public interface RepairService extends IService<Repair> {
 
     PageInfo<Repair> findRepairAll(int page, int pagesise, Repair repair);
-
+//    PageInfo<Repair> findAll(int page, int pagesise, Repair repair);
+    
     List<Repair> queryListAll();
     /**
      * 查询分页数据

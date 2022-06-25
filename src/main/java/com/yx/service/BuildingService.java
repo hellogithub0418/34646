@@ -6,14 +6,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.yx.model.Building;
 
-/**
- * <p>
- *  服务类
- * </p>
- *
- * @author cuijianhui
- * @since 2020-12-08
- */
 public interface BuildingService extends IService<Building> {
 
     PageInfo<Building> findBuildAll(int page,int pageSize,String numbers);

@@ -3,10 +3,11 @@
 
         <div class="demoTable layui-form">
 
-            报修类型：
+            报修楼宇：
             <div class="layui-inline">
-                <select name="comId"  id="typeId" lay-verify="required" lay-search="">
-                    <option value="">选择报修类型</option>
+                 <!--   <input name="buildingName" class=""  id="typeId" lay-verify="required" lay-search="选择报修类型" value="">-->
+            	  <select name="buildingName"  id="typeId" lay-verify="required" value="">
+                    
                 </select>
             </div>
             处理状态：
@@ -32,7 +33,6 @@
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">报修处理</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
             {{# }else{ }}
-			<a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">修改</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
             {{# } }}
         </script>
@@ -103,6 +103,7 @@
 
         //获取费用类型 并渲染数据到select标签
         $.get("repair/queryAll",{},function (data) {
+        	console.log("=============");
             var list=data;
             var select =document.getElementById("typeId");
             if(list!=null || list.size()>0){
@@ -119,8 +120,10 @@
 
         var $ = layui.$, active = {
             reload: function(){
-                var comId = $('#typeId');
+               	var typeId = $('#typeId');
                 var status = $('#status');
+                console.log(typeId.val());
+                console.log(status.val());
                 //执行重载
                 table.reload('testReload', {
                     page: {
@@ -128,7 +131,7 @@
                     }
                     ,where: {
                         status:status.val(),
-                        comId:comId.val()
+                        typeId:typeId.val()
                     }
                 }, 'data');
             }
@@ -141,6 +144,7 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
+        	console.log(data)
             var result = JSON.stringify(data.field);
             layer.alert(result, {
                 title: '最终的搜索信息'
@@ -232,7 +236,7 @@
                 	let i=data.indexOf(obj.data.repairId);
                 	data.splice(i,1)
                 }
-                console.log("//////",data);
+                //console.log("//////",data);
             }
         });
 

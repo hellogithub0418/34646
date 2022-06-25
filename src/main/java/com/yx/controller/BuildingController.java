@@ -18,14 +18,6 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author cuijianhui
- * @since 2020-12-08
- */
 @Api(tags = {""})
 @RestController
 @RequestMapping("/building")

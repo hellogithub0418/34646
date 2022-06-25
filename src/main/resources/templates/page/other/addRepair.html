@@ -1,31 +1,23 @@
 <div class="layuimini-main">
-
     <div class="layui-form layuimini-form">
-
         <div class="layui-form-item">
             <label class="layui-form-label required">报修楼宇</label>
-            <div class="layui-input-block">
-                <select name="buildingName" lay-verify="required"  id="typeId2" lay-search="">
-                    <option value="">请选择报修楼宇</option>
-                </select>
+            <div>
+                <input type="text" name="buildingName" lay-verify="required"  id="typeId2" lay-search="楼宇编号不能为空" value="" calss="layui-input">
             </div>
         </div>
         
         <div class="layui-form-item">
             <label class="layui-form-label required">报修房屋</label>
             <div class="layui-input-block">
-                <select name="numbers" lay-verify="required"  id="typeId2" lay-search="">
-                    <option value="">请选择报修房屋</option>
-                </select>
+                <input name="numbers" lay-verify="required"  id="typeId2" lay-search="报修房屋好不能为空" value="" placeholder="请选择报修房屋">
             </div>
         </div>
         
         <div class="layui-form-item">
             <label class="layui-form-label required">报修人</label>
             <div class="layui-input-block">
-                <select name="username" lay-verify="required"  id="typeId2" lay-search="">
-                    <option value="">请选择报修人</option>
-                </select>
+                 <input name="username" lay-verify="required"  id="typeId2" lay-search="请选择报修人" value="">
             </div>
         </div>
 
@@ -62,8 +54,8 @@
             if(list!=null || list.size()>0){
                 for(var c in list){
                     var option=document.createElement("option");
-                    option.setAttribute("value",list[c].id);
-                    option.innerText=list[c].name;
+                    option.setAttribute("value",list[c].repairId);
+                    option.innerText=list[c].status;
                     select.appendChild(option);
                 }
             }

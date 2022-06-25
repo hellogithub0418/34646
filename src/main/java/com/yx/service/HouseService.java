@@ -9,14 +9,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-/**
- * <p>
- *  服务类
- * </p>
- *
- * @author cuijianhui
- * @since 2020-12-08
- */
 public interface HouseService extends IService<House> {
 
     /**

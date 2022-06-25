@@ -15,11 +15,18 @@
 
         <script type="text/html" id="toolbarDemo">
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="add"> 我要报修 </button>
+				<button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 批量删除 </button>
             </div>
         </script>
-
+		
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-
+		<script type="text/html" id="currentTableBar">
+		{{# if(d.status=='0'){ }}
+		<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        {{# }else{ }}
+        <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        {{# } }}
+		</script>
     </div>
 </div>
 
@@ -55,7 +62,8 @@
                         }
                     }
                 },
-                {title: '', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
+                
+                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
                 ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -73,7 +81,7 @@
                 for(var c in list){
                     var option=document.createElement("option");
                     option.setAttribute("value",list[c].repairId);
-                    option.innerText=list[c].name;
+                    option.innerText=list[c].numbers;
                     select.appendChild(option);
                 }
             }
@@ -83,7 +91,7 @@
 
         var $ = layui.$, active = {
             reload: function(){
-                var comId = $('#typeId');
+                //var comId = $('#typeId');
                 var status = $('#status');
                 //执行重载
                 table.reload('testReload', {
@@ -114,8 +122,37 @@
                $(window).on("resize", function () {
                    layer.full(index);
                });
-
            }
+           else if(obj.event === 'delete'){
+        	   if(data.length==0){
+                   layer.msg("请选择要删除的记录信息");
+               }else{
+                   //获取要删除id的集合
+                   //var ids =getCheckId(data);
+                   layer.confirm('你确定要删除记录吗？',function (index) {
+                        //执行删除功能
+                        let str="";
+                        for(let i=0;i<data.length;i++){
+                       	 if(i==0){
+                       		 str=str+data[i];
+                       	 }else{
+                       		 str=str+","+data[i];
+                       	 }
+                        }
+                       deleteByIds($,"repair/deleteByIds",str,index);
+                   })
+
+               }
+           }
+        });
+        
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'delete') {
+                layer.confirm('确定是否删除', function (index) {
+                    deleteByIds($,"repair/deleteByIds",data.repairId,index)
+                });
+            }
         });
 
 
@@ -123,6 +160,23 @@
         //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
             console.log(obj)
+            if(obj.type=="all"){
+  				if(obj.checked){
+  					for(let j=0;j<table.cache.testReload.length;j++){
+  						data.push(table.cache.testReload[j].repairId);
+  					}
+  				}else{
+  					data=[];
+  				}
+            }else{
+            	if(obj.checked){
+                	data.push(obj.data.repairId);
+                }else{
+                	let i=data.indexOf(obj.data.repairId);
+                	data.splice(i,1)
+                }
+                //console.log("//////",data);
+            }
         });
 
     });

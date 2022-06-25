@@ -20,7 +20,7 @@
         select * from building
         <where>
             <if test="numbers!=null and numbers!=''">
-                and numbers like '%${numbers}%'
+                and building_name like '%${numbers}%'
             </if>
         </where>
     </select>
