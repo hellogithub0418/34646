@@ -15,7 +15,7 @@
 
         <!-- 通用查询结果列 -->
         <sql id="Base_Column_List">
-            id, report_date, order_id, type1, type2, today_address, remarks
+            id, report_date, owner_id, type1, type2, today_address, remarks
         </sql>
 
         <resultMap id="queryClockInAllMap" type="com.yx.model.Clockinnew" extends="BaseResultMap">
@@ -46,7 +46,7 @@
         <select id="queryCountByOwnId" resultType="java.util.Date" parameterType="Integer">
             SELECT report_date
             FROM clockinnew cloc
-            LEFT JOIN OWNER ON cloc.owner_id = owner.id
+            LEFT JOIN OWNER ON cloc.owner_id = owner.owner_id
             WHERE cloc.owner_id=#{ownerId}
             ORDER BY report_date DESC
             LIMIT 1

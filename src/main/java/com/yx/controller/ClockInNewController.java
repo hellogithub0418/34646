@@ -102,6 +102,7 @@ public class ClockInNewController {
          * 若未打卡则，添加打卡信息
          * 通过username查找对应的owner，可获取到其id
          */
+    	log.info("我进来了");
         //获取当前得登录用户
         Userinfo userinfo= (Userinfo) request.getSession().getAttribute("user");
         String username=userinfo.getUsername();

@@ -21,5 +21,5 @@ public interface ClockinnewMapper extends BaseMapper<Clockinnew> {
      */
     List<Clockinnew> queryClockInAll(Clockinnew clockinnew);
 
-    Date queryCountByOwnId(Integer ownId);
+    Date queryCountByOwnId(Integer OwnerId);
 }
