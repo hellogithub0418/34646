@@ -99,55 +99,115 @@ public class PropertyIntoController{
 		Integer buildingId=propertyInto.getBuildingId();
 		//获取propertyInfo基本信息
 		
-		
-		double prices = propertyInto.getPrice();
-		Integer count = houseService.queryCountH(buildingId);
-		log.info("前端传来的金额"+prices);
-		log.info("房间数量"+count);
-		BigDecimal pricesBig = new BigDecimal(prices);
-		BigDecimal countBig = new BigDecimal(count);
+		if(buildingId!=1) {
+			double prices = propertyInto.getPrice();
+			Integer count = houseService.queryCountH(buildingId);
+			log.info("前端传来的金额"+prices);
+			log.info("房间数量"+count);
+			BigDecimal pricesBig = new BigDecimal(prices);
+			BigDecimal countBig = new BigDecimal(count);
 
-		log.info(""+count);
-		//获取楼宇下的所房间号
-		List<House> listHouse = houseService.queryHouseIdByBid(buildingId);
-		
-		
-		//
-		Double averPrices = pricesBig.divide(countBig).doubleValue();
-		log.info(listHouse.size()+" === 平均数"+averPrices);
-		//获取的houseId先转成集合对象
-		//List<String> listHouse= Arrays.asList(houseID.toString().split(","));
-		if(count!=0) {
-			//3、金额除房间数得到平均数
-//			Double averPrices = pricesBig.divide(countBig).doubleValue();
-			log.info("平均数"+averPrices);
-			//遍历添加
-			for(House house:listHouse) {
-				//添加到物业费总表
-				PropertyInfo info=new PropertyInfo();
-				info.setType(propertyInto.getType());
-				info.setPrice(averPrices);
-				info.setTime(propertyInto.getTime());
-				info.setStatus(0);//默认未缴费
-				info.setHouseId(house.getHouseId());
-				info.setRemarks(propertyInto.getRemarks());
-				
-				log.info("房间数量"+propertyInto.getType());
-				log.info("房间数量"+propertyInto.getTime());
-				log.info("房间数量"+house.getHouseId());
-				log.info("备注"+propertyInto.getRemarks());
-				//log.info("房间数量"+propertyInto.getTime());
-				//添加到物业总表里
-				propertyInfoService.add(info);
+			log.info(""+count);
+			//获取楼宇下的所房间号
+			List<House> listHouse = houseService.queryHouseIdByBid(buildingId);
+			
+			
+			//
+			Double averPrices = pricesBig.divide(countBig).doubleValue();
+			log.info(listHouse.size()+" === 平均数"+averPrices);
+			//获取的houseId先转成集合对象
+			//List<String> listHouse= Arrays.asList(houseID.toString().split(","));
+			if(count!=0) {
+				//3、金额除房间数得到平均数
+//				Double averPrices = pricesBig.divide(countBig).doubleValue();
+				log.info("平均数"+averPrices);
+				//遍历添加
+				for(House house:listHouse) {
+					//添加到物业费总表
+					PropertyInfo info=new PropertyInfo();
+					info.setType(propertyInto.getType());
+					info.setPrice(averPrices);
+					info.setTime(propertyInto.getTime());
+					info.setStatus(0);//默认未缴费
+					info.setHouseId(house.getHouseId());
+					info.setRemarks(propertyInto.getRemarks());
+					
+					log.info("房间数量"+propertyInto.getType());
+					log.info("房间数量"+propertyInto.getTime());
+					log.info("房间数量"+house.getHouseId());
+					log.info("备注"+propertyInto.getRemarks());
+					//log.info("房间数量"+propertyInto.getTime());
+					//添加到物业总表里
+					propertyInfoService.add(info);
 
+				}
+			}
+			else {
+				return R.fail("该楼宇没有住户！");
 			}
 		}
+		//buildingId=1 代表全小区
+		
 		else {
-			return R.fail("该楼宇没有住户！");
+			double prices = propertyInto.getPrice();
+			//获取全小区所有房间数量
+			List<House> HouseCount = houseService.findList();
+			log.info("前端传来的金额"+prices);
+			log.info("房间数量"+HouseCount);
+			BigDecimal pricesBig = new BigDecimal(prices);
+			BigDecimal countBig = new BigDecimal(HouseCount.size());
+
+			log.info(""+HouseCount.size());
+			//获取楼宇下的所房间号
+			//List<House> listHouse = houseService.queryHouseIdByBid(buildingId);
+			
+			
+			//
+			Double averPrices = pricesBig.divide(countBig).doubleValue();
+			log.info(HouseCount.size()+" === 平均数"+averPrices);
+			//获取的houseId先转成集合对象
+			//List<String> listHouse= Arrays.asList(houseID.toString().split(","));
+				//3、金额除房间数得到平均数
+//				Double averPrices = pricesBig.divide(countBig).doubleValue();
+				log.info("平均数"+averPrices);
+				//遍历添加
+		    for(House house:HouseCount) {
+					//添加到物业费总表
+			PropertyInfo info=new PropertyInfo();
+			info.setType(propertyInto.getType());
+			info.setPrice(averPrices);
+			info.setTime(propertyInto.getTime());
+			info.setStatus(0);//默认未缴费
+			info.setHouseId(house.getHouseId());
+			info.setRemarks(propertyInto.getRemarks());
+			//测试
+			log.info("房间数量"+propertyInto.getType());
+			log.info("房间数量"+propertyInto.getTime());
+			log.info("房间数量"+house.getHouseId());
+			log.info("备注"+propertyInto.getRemarks());
+					//log.info("房间数量"+propertyInto.getTime());
+					//添加到物业总表里
+			propertyInfoService.add(info);
+
+			}			
+			
 		}
 		return R.ok();
 		
       }
+	
+    @RequestMapping("/deleteByIds")
+    @Transactional(rollbackFor = {RuntimeException.class,Error.class})
+    public R deleteByIds(String ids){
+         //把字符串转list集合
+         List<String> list=Arrays.asList(ids.split(","));
+         for(String id : list){
+        	 Long idLong=Long.parseLong(id);
+        	 propertyIntoService.delete(idLong);
+
+         }
+        return R.ok();
+    }
 	
 	
 	

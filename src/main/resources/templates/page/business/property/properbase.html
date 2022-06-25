@@ -6,6 +6,10 @@
             </div>
         </script>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+        
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
 
     </div>
 </div>
@@ -33,12 +37,12 @@
             cols: [[
              
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'time', width: 120, title: '时间'},
-                {field: 'type', width: 120, title: '类型'},
+                {field: 'time', width: 200, title: '时间'},
+                {field: 'type', width: 100, title: '类型'},
                 {field: 'price', width: 100, title: '金额'},
                 {field: 'buildingId', width: 100, title: '楼宇编号'},
-                {field: 'remarks', width: 100, title: '备注',}
-                //{title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
+                {field: 'remarks', width: 200, title: '备注',},
+                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -61,6 +65,15 @@
                     layer.full(index);
                 });
             }
+        });
+        
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'delete') {
+                layer.confirm('确定是否删除？', function (index) {
+                    deleteByIds($,"propertyinto/deleteByIds",data.id,index)
+                });
+            } 
         });
 
 
