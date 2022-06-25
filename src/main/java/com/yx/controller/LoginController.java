@@ -51,5 +51,15 @@ public class LoginController {
         }
 
     }
+    
+    /**
+     * 退出功能
+     */
+    @RequestMapping("/loginOut")
+    public void loginOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session=request.getSession();
+        session.invalidate();
+        response.sendRedirect(request.getContextPath()+"/login.html");
+    }
 
 }
