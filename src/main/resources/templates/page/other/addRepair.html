@@ -4,6 +4,7 @@
             <label class="layui-form-label required">报修楼宇</label>
             <div>
                 <input type="text" name="buildingName" lay-verify="required"  id="typeId2" lay-search="楼宇编号不能为空" value="" calss="layui-input">
+                <!--  <select type="text" name="buildingName" lay-verify="required"  id="typeId2" lay-search="楼宇编号不能为空" value="" calss="layui-input"></select>-->
             </div>
         </div>
         
@@ -40,6 +41,7 @@
         var form = layui.form,
             layer = layui.layer,
             table = layui.table,
+            data =[],
             $ = layui.$;
 
         /**

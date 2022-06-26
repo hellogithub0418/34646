@@ -35,6 +35,7 @@
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
+            data =[],
             miniPage = layui.miniPage;
 
         table.render({
@@ -100,9 +101,9 @@
                     }
                     ,where: {
                         status:status.val(),
-                        comId:comId.val()
+                        //comId:comId.val()
                     }
-                }, 'data');
+                }, data);
             }
         };
 
@@ -124,26 +125,26 @@
                });
            }
            else if(obj.event === 'delete'){
-        	   if(data.length==0){
-                   layer.msg("请选择要删除的记录信息");
-               }else{
-                   //获取要删除id的集合
-                   //var ids =getCheckId(data);
-                   layer.confirm('你确定要删除记录吗？',function (index) {
-                        //执行删除功能
-                        let str="";
-                        for(let i=0;i<data.length;i++){
-                       	 if(i==0){
-                       		 str=str+data[i];
-                       	 }else{
-                       		 str=str+","+data[i];
-                       	 }
-                        }
-                       deleteByIds($,"repair/deleteByIds",str,index);
-                   })
-
-               }
-           }
+	        	   if(data.length==0){
+	                   layer.msg("请选择要删除的记录信息");
+	               }else{
+	                   //获取要删除id的集合
+	                   //var ids =getCheckId(data);
+	                   layer.confirm('你确定要删除记录吗？',function (index) {
+	                        //执行删除功能
+	                        let str="";
+	                        for(let i=0;i<data.length;i++){
+	                       	 if(i==0){
+	                       		 str=str+data[i];
+	                       	 }else{
+	                       		 str=str+","+data[i];
+	                       		 ids=str;
+	                       	 }
+	                        }
+	                       deleteByIds($,"repair/deleteByIds",str,index);
+	                   })
+               	}
+           	}
         });
         
         table.on('tool(currentTableFilter)', function (obj) {
